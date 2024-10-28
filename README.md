@@ -37,10 +37,11 @@ CRM-DecisionDashboard/
 ---
 
 ## 📈 Key Insights
-Sales Performance: Visualize key metrics such as revenue, orders, and trends.
-Customer Analysis: Understand customer behaviors, segments, and preferences.
-KPI Tracking: Monitor essential business indicators for strategic decision-making.
-ETL Pipelines: Ensure clean and accurate data using SSIS.
+- **Sales Performance :** Visualize key metrics such as revenue, orders, and trends.
+- **Customer Analysis :** Understand customer behaviors, segments, and preferences.
+- **Product Performance :** Track the performance of products and categories.
+- **KPI Tracking :** Monitor essential business indicators for strategic decision-making.
+- **ETL Pipelines :** Ensure clean and accurate data using SSIS.
 
 ---
 
@@ -56,9 +57,9 @@ Overview Dashboard:
 ---
 
 ## 💡 Future Improvements
-Add predictive models to anticipate customer churn.
-Implement automated data refresh using Power BI Service for real-time insights.
-Integrate customer feedback to enhance CRM insights further.
+- Development of prediction algorithms for advanced analyses.
+- Implement automated data refresh using Power BI Service for real-time insights.
+- Integrate customer feedback to enhance CRM insights further.
 
 ---
 
