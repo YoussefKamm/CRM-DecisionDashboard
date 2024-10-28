@@ -1,0 +1,1094 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/22/2024 10:26:02 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-U58L4FM"
+  DTS:CreatorName="DESKTOP-U58L4FM\ASUS"
+  DTS:DTSID="{51D71533-9FA8-41AD-9CAC-86A3B90F7320}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5397.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="pfe_DWH_Schema"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{8CF3953A-E78A-4AED-8044-D4087D7C6EF4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CREATE TABLE"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A96F3BCA-6A67-4ED1-A652-4E4C8902DBC4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CREATE TABLE"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6A6FEE0D-9800-4F35-AE71-C147942857DE}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="&#xA;&#xA;&#xA;&#x9;--Make sure you set the Start and End Date below on row 58 and 59&#xA; --Create the tables&#xA; BEGIN TRY&#xA; DROP TABLE [DimDate];&#xA; END TRY&#xA; BEGIN CATCH&#xA; --DO NOTHING&#xA; END CATCH&#xA;&#xA; &#xA;&#xA;CREATE TABLE [dbo].[DimDate]&#xA; (&#xA; --[DateSK] [int] IDENTITY(1,1) NOT NULL--Use this line if you just want an autoincrementing counter AND COMMENT BELOW LINE&#xA; [DateSK]                      INT          NOT NULL, --TO MAKE THE DateSK THE YYYYMMDD FORMAT USE THIS LINE AND COMMENT ABOVE LINE.&#xA; [FullDate]                    DATETIME     NOT NULL,&#xA; [Day]                         TINYINT      NOT NULL,&#xA; [DaySuffix]                   VARCHAR (4)  NOT NULL,&#xA; [DayOfWeek]                   VARCHAR (9)  NOT NULL,&#xA; [DayOfWeekNumber]             INT          NOT NULL,&#xA; [DayOfWeekInMonth]            TINYINT      NOT NULL,&#xA; [DayOfYearNumber]             INT          NOT NULL,&#xA; [RelativeDays]                INT          NOT NULL,&#xA; [WeekOfYearNumber]            TINYINT      NOT NULL,&#xA; [WeekOfMonthNumber]           TINYINT      NOT NULL,&#xA; [RelativeWeeks]               INT          NOT NULL,&#xA; [CalendarMonthNumber]         TINYINT      NOT NULL,&#xA; [CalendarMonthName]           VARCHAR (9)  NOT NULL,&#xA; [RelativeMonths]              INT          NOT NULL,&#xA; [CalendarQuarterNumber]       TINYINT      NOT NULL,&#xA; [CalendarQuarterName]         VARCHAR (6)  NOT NULL,&#xA; [RelativeQuarters]            INT          NOT NULL,&#xA; [CalendarYearNumber]          INT          NOT NULL,&#xA; [RelativeYears]               INT          NOT NULL,&#xA; [StandardDate]                VARCHAR (10) NULL,&#xA; [WeekDayFlag]                 BIT          NOT NULL,&#xA; [HolidayFlag]                 BIT          NOT NULL,&#xA; [OpenFlag]                    BIT          NOT NULL,&#xA; [FirstDayOfCalendarMonthFlag] BIT          NOT NULL,&#xA; [LastDayOfCalendarMonthFlag]  BIT          NOT NULL,&#xA; [HolidayText]                 VARCHAR (50) NULL CONSTRAINT [PK_DimDate] PRIMARY KEY CLUSTERED ([DateSK] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90) ON [PRIMARY]&#xA; ) ON [PRIMARY];&#xA;&#xA; &#xA; GO&#xA; --Populate Date dimension&#xA; TRUNCATE TABLE DimDate;&#xA;&#xA; &#xA;&#xA;--IF YOU ARE USING THE YYYYMMDD format for the primary key then you need to comment out this line.&#xA; --DBCC CHECKIDENT (DimDate, RESEED, 60000) --In case you need to add earlier dates later.&#xA; DECLARE @tmpDOW TABLE (&#xA; DOW  INT,&#xA; Cntr INT); --Table for counting DOW occurance in a month&#xA;&#xA; &#xA;&#xA;INSERT  INTO @tmpDOW (DOW, Cntr)&#xA; VALUES              (1, 0); --Used in the loop below&#xA;&#xA; &#xA;&#xA;INSERT  INTO @tmpDOW (DOW, Cntr)&#xA; VALUES              (2, 0);&#xA;&#xA; &#xA;&#xA;INSERT  INTO @tmpDOW (DOW, Cntr)&#xA; VALUES              (3, 0);&#xA;&#xA; &#xA;&#xA;INSERT  INTO @tmpDOW (DOW, Cntr)&#xA; VALUES              (4, 0);&#xA;&#xA; &#xA;&#xA;INSERT  INTO @tmpDOW (DOW, Cntr)&#xA; VALUES              (5, 0);&#xA;&#xA; &#xA;&#xA;INSERT  INTO @tmpDOW (DOW, Cntr)&#xA; VALUES              (6, 0);&#xA;&#xA; &#xA;&#xA;INSERT  INTO @tmpDOW (DOW, Cntr)&#xA; VALUES              (7, 0);&#xA;&#xA; &#xA;&#xA;DECLARE @StartDate AS DATETIME,&#xA; @EndDate AS DATETIME,&#xA; @Date AS DATETIME,&#xA; @WDofMonth AS INT,&#xA; @CurrentMonth AS INT,&#xA; @CurrentDate AS DATE = getdate();&#xA;&#xA; &#xA;&#xA;SELECT @StartDate = '1/1/2000', -- Set The start and end date&#xA; @EndDate = '1/01/2020', --Non inclusive. Stops on the day before this.&#xA; @CurrentMonth = 1; --Counter used in loop below.&#xA;&#xA; &#xA;&#xA;SELECT @Date = @StartDate;&#xA;&#xA; &#xA;&#xA;WHILE @Date &lt; @EndDate&#xA; BEGIN&#xA; IF DATEPART(MONTH, @Date) &lt;&gt; @CurrentMonth&#xA; BEGIN&#xA; SELECT @CurrentMonth = DATEPART(MONTH, @Date);&#xA; UPDATE  @tmpDOW&#xA; SET Cntr = 0;&#xA; END&#xA; UPDATE  @tmpDOW&#xA; SET Cntr = Cntr + 1&#xA; WHERE   DOW = DATEPART(DW, @DATE);&#xA; SELECT @WDofMonth = Cntr&#xA; FROM   @tmpDOW&#xA; WHERE  DOW = DATEPART(DW, @DATE);&#xA; INSERT INTO DimDate ([DateSK], [FullDate], [Day], [DaySuffix], [DayOfWeek], [DayOfWeekNumber], [DayOfWeekInMonth], [DayOfYearNumber], [RelativeDays], [WeekOfYearNumber], [WeekOfMonthNumber], [RelativeWeeks], [CalendarMonthNumber], [CalendarMonthName], [RelativeMonths], [CalendarQuarterNumber], [CalendarQuarterName], [RelativeQuarters], [CalendarYearNumber], [RelativeYears], [StandardDate], [WeekDayFlag], [HolidayFlag], [OpenFlag], [FirstDayOfCalendarMonthFlag], [LastDayOfCalendarMonthFlag], HolidayText) --TO MAKE THE DateSK THE YYYYMMDD FORMAT UNCOMMENT THIS LINE… Comment for autoincrementing.&#xA; SELECT CONVERT (VARCHAR, @Date, 112) AS [DateSK], --TO MAKE THE DateSK THE YYYYMMDD FORMAT UNCOMMENT THIS LINE COMMENT FOR AUTOINCREMENT&#xA; @Date AS [FullDate],&#xA; DATEPART(DAY, @DATE) AS [Day],&#xA; CASE&#xA; WHEN DATEPART(DAY, @DATE) IN (11, 12, 13) THEN CAST (DATEPART(DAY, @DATE) AS VARCHAR) + 'th'&#xA; WHEN RIGHT(DATEPART(DAY, @DATE), 1) = 1 THEN CAST (DATEPART(DAY, @DATE) AS VARCHAR) + 'st'&#xA; WHEN RIGHT(DATEPART(DAY, @DATE), 1) = 2 THEN CAST (DATEPART(DAY, @DATE) AS VARCHAR) + 'nd'&#xA; WHEN RIGHT(DATEPART(DAY, @DATE), 1) = 3 THEN CAST (DATEPART(DAY, @DATE) AS VARCHAR) + 'rd' ELSE CAST (DATEPART(DAY, @DATE) AS VARCHAR) + 'th'&#xA; END AS [DaySuffix],&#xA; CASE DATEPART(DW, @DATE)&#xA; WHEN 1 THEN 'Sunday'&#xA; WHEN 2 THEN 'Monday'&#xA; WHEN 3 THEN 'Tuesday'&#xA; WHEN 4 THEN 'Wednesday'&#xA; WHEN 5 THEN 'Thursday'&#xA; WHEN 6 THEN 'Friday'&#xA; WHEN 7 THEN 'Saturday'&#xA; END AS [DayOfWeek],&#xA; DATEPART(DW, @DATE) AS [DayOfWeekNumber],&#xA; @WDofMonth AS [DOWInMonth], --Occurance of this day in this month. If Third Monday then 3 and DOW would be Monday.&#xA; DATEPART(dy, @Date) AS [DayOfYearNumber], --Day of the year. 0 — 365/366&#xA; DATEDIFF(dd, @CurrentDate, @Date) AS [RelativeDays],&#xA; DATEPART(ww, @Date) AS [WeekOfYearNumber], --0-52/53&#xA; DATEPART(ww, @Date) + 1 - DATEPART(ww, CAST (DATEPART(mm, @Date) AS VARCHAR) + '/1/' + CAST (DATEPART(yy, @Date) AS VARCHAR)) AS [WeekOfMonthNumber],&#xA; DATEDIFF(ww, @CurrentDate, @Date) AS [RelativeWeeks],&#xA; DATEPART(MONTH, @DATE) AS [CalendarMonthNumber], --To be converted with leading zero later.&#xA; DATENAME(MONTH, @DATE) AS [CalendarMonthName],&#xA; DATEDIFF(MONTH, @CurrentDate, @Date) AS [RelativeMonths],&#xA; DATEPART(qq, @DATE) AS [CalendarQuarterNumber], --Calendar quarter&#xA; CASE DATEPART(qq, @DATE)&#xA; WHEN 1 THEN 'First'&#xA; WHEN 2 THEN 'Second'&#xA; WHEN 3 THEN 'Third'&#xA; WHEN 4 THEN 'Fourth'&#xA; END AS [CalendarQuarterName],&#xA; DATEDIFF(qq, @CurrentDate, @Date) AS [RelativeQuarters],&#xA; DATEPART(YEAR, @Date) AS [CalendarYearNumber],&#xA; DATEDIFF(YEAR, @CurrentDate, @Date) AS [RelativeYears],&#xA; RIGHT('0' + CONVERT (VARCHAR (2), MONTH(@Date)), 2) + '/' + RIGHT('0' + CONVERT (VARCHAR (2), DAY(@Date)), 2) + '/' + CONVERT (VARCHAR (4), YEAR(@Date)),&#xA; CASE DATEPART(DW, @DATE)&#xA; WHEN 1 THEN 0&#xA; WHEN 2 THEN 1&#xA; WHEN 3 THEN 1&#xA; WHEN 4 THEN 1&#xA; WHEN 5 THEN 1&#xA; WHEN 6 THEN 1&#xA; WHEN 7 THEN 0&#xA; END AS [WeekDayFlag],&#xA; 0 AS HolidayFlag,&#xA; CASE DATEPART(DW, @DATE)&#xA; WHEN 1 THEN 0&#xA; WHEN 2 THEN 1&#xA; WHEN 3 THEN 1&#xA; WHEN 4 THEN 1&#xA; WHEN 5 THEN 1&#xA; WHEN 6 THEN 1&#xA; WHEN 7 THEN 1&#xA; END AS OpenFlag,&#xA; CASE DATEPART(dd, @Date)&#xA; WHEN 1 THEN 1 ELSE 0&#xA; END AS [FirstDayOfCalendarMonthFlag],&#xA; CASE&#xA; WHEN DateAdd(day, -1, DateAdd(month, DateDiff(month, 0, @Date) + 1, 0)) = @Date THEN 1 ELSE 0&#xA; END AS [LastDayOfCalendarMonthFlag],&#xA; NULL AS HolidayText;&#xA; SELECT @Date = DATEADD(dd, 1, @Date);&#xA; END&#xA;&#xA; &#xA;&#xA;-- Add HOLIDAYS ————————————————————————————————————--&#xA;-- New Years Day ———————————————————————————————&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'New Year”s Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; WHERE   [CalendarMonthNumber] = 1&#xA; AND [DAY] = 1;&#xA;&#xA; &#xA;&#xA;--Set OpenFlag = 0 if New Year's Day is on weekend&#xA; UPDATE  dbo.DimDate&#xA; SET OpenFlag = 0&#xA; WHERE   DateSK IN (SELECT CASE&#xA; WHEN DayOfWeek = 'Sunday' THEN DATESK + 1&#xA; END&#xA; FROM   DimDate&#xA; WHERE  CalendarMonthNumber = 1&#xA; AND [DAY] = 1);&#xA;&#xA; &#xA;&#xA;-- Martin Luther King Day —————————————————————————————&#xA;--Third Monday in January starting in 1983&#xA; UPDATE  DimDate&#xA; SET HolidayText = 'Martin Luther King Jr. Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; WHERE   [CalendarMonthNumber] = 1 --January&#xA; AND [Dayofweek] = 'Monday'&#xA; AND CalendarYearNumber &gt;= 1983 --When holiday was official&#xA; AND [DayOfWeekInMonth] = 3; --Third X day of current month.&#xA;&#xA; &#xA; GO&#xA; --President's Day —————————————————————————————&#xA; --Third Monday in February.&#xA; UPDATE  DimDate&#xA; SET HolidayText = 'President”s Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; WHERE   [CalendarMonthNumber] = 2 --February&#xA; AND [Dayofweek] = 'Monday'&#xA; AND [DayOfWeekInMonth] = 3; --Third occurance of a monday in this month.&#xA;&#xA; &#xA; GO&#xA; --Memorial Day —————————————————————————————-&#xA; --Last Monday in May&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'Memorial Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; FROM    DimDate&#xA; WHERE   DateSK IN (SELECT   MAX([DateSK])&#xA; FROM     dbo.DimDate&#xA; WHERE    [CalendarMonthName] = 'May'&#xA; AND [DayOfWeek] = 'Monday'&#xA; GROUP BY CalendarYearNumber, [CalendarMonthNumber]);&#xA;&#xA; &#xA;&#xA;--4th of July ———————————————————————————————&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'Independance Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; WHERE   [CalendarMonthNumber] = 7&#xA; AND [DAY] = 4;&#xA;&#xA; &#xA;&#xA;--Set OpenFlag = 0 if July 4th is on weekend&#xA; UPDATE  dbo.DimDate&#xA; SET OpenFlag = 0&#xA; WHERE   DateSK IN (SELECT CASE&#xA; WHEN DayOfWeek = 'Sunday' THEN DATESK + 1&#xA; END&#xA; FROM   DimDate&#xA; WHERE  CalendarMonthNumber = 7&#xA; AND [DAY] = 4);&#xA;&#xA; &#xA;&#xA;--Labor Day ——————————————————————————————-&#xA; --First Monday in September&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'Labor Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; FROM    DimDate&#xA; WHERE   DateSK IN (SELECT   MIN([DateSK])&#xA; FROM     dbo.DimDate&#xA; WHERE    [CalendarMonthName] = 'September'&#xA; AND [DayOfWeek] = 'Monday'&#xA; GROUP BY CalendarYearNumber, [CalendarMonthNumber]);&#xA;&#xA; &#xA;&#xA;--Columbus Day——————————————————————————————&#xA;--2nd Monday in October&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'Columbus Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; FROM    DimDate&#xA; WHERE   DateSK IN (SELECT   MIN(DateSK)&#xA; FROM     dbo.DimDate&#xA; WHERE    [CalendarMonthName] = 'October'&#xA; AND [DayOfWeek] = 'Monday'&#xA; AND [DayOfWeekInMonth] = 2&#xA; GROUP BY CalendarYearNumber, [CalendarMonthNumber]);&#xA;&#xA; &#xA;&#xA;--Veteran's Day ————————————————————————————————————--&#xA; UPDATE  DimDate&#xA; SET HolidayText = 'Veteran”s Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; WHERE   DateSK IN (SELECT CASE&#xA; WHEN DayOfWeek = 'Saturday' THEN DateSK - 1&#xA; WHEN DayOfWeek = 'Sunday' THEN DateSK + 1 ELSE DateSK&#xA; END AS VeteransDateSK&#xA; FROM   DimDate&#xA; WHERE  [CalendarMonthNumber] = 11&#xA; AND [DAY] = 11);&#xA;&#xA; &#xA; GO&#xA; --THANKSGIVING ————————————————————————————————————--&#xA; --Fourth THURSDAY in November.&#xA; UPDATE  DimDate&#xA; SET HolidayText = 'Thanksgiving Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; WHERE   [CalendarMonthNumber] = 11&#xA; AND [DAYOFWEEK] = 'Thursday'&#xA; AND [DayOfWeekInMonth] = 4;&#xA;&#xA; &#xA; GO&#xA; --CHRISTMAS ——————————————————————————————-&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'Christmas Day',&#xA; HolidayFlag = 1,&#xA; OpenFlag    = 0&#xA; WHERE   [CalendarMonthNumber] = 12&#xA; AND [DAY] = 25;&#xA;&#xA; &#xA;&#xA;--Set OpenFlag = 0 if Christmas on weekend&#xA; UPDATE  dbo.DimDate&#xA; SET OpenFlag = 0&#xA; WHERE   DateSK IN (SELECT CASE&#xA; WHEN DayOfWeek = 'Sunday' THEN DATESK + 1&#xA; WHEN Dayofweek = 'Saturday' THEN DateSK - 1&#xA; END&#xA; FROM   DimDate&#xA; WHERE  CalendarMonthNumber = 12&#xA; AND DAY = 25);&#xA;&#xA; &#xA;&#xA;-- Valentine's Day&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'Valentine''s Day'&#xA; WHERE   CalendarMonthNumber = 2&#xA; AND [DAY] = 14;&#xA;&#xA; &#xA;&#xA;-- Saint Patrick's Day&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'Saint Patrick''s Day'&#xA; WHERE   [CalendarMonthNumber] = 3&#xA; AND [DAY] = 17;&#xA;&#xA; &#xA; GO&#xA; --Mother's Day —————————————————————————————&#xA; --Second Sunday of May&#xA; UPDATE  DimDate&#xA; SET HolidayText = 'Mother''s Day' --select * from DimDate&#xA; WHERE   [CalendarMonthNumber] = 5 --May&#xA; AND [Dayofweek] = 'Sunday'&#xA; AND [DayOfWeekInMonth] = 2; --Second occurance of a monday in this month.&#xA;&#xA; &#xA; GO&#xA; --Father's Day —————————————————————————————&#xA; --Third Sunday of June&#xA; UPDATE  DimDate&#xA; SET HolidayText = 'Father''s Day' --select * from DimDate&#xA; WHERE   [CalendarMonthNumber] = 6 --June&#xA; AND [Dayofweek] = 'Sunday'&#xA; AND [DayOfWeekInMonth] = 3; --Third occurance of a monday in this month.&#xA;&#xA; &#xA; GO&#xA; --Halloween 10/31 ———————————————————————————-&#xA; UPDATE  dbo.DimDate&#xA; SET HolidayText = 'Halloween'&#xA; WHERE   [CalendarMonthNumber] = 10&#xA; AND [DAY] = 31;&#xA;&#xA; &#xA;&#xA;-- Election Day————————————————————————————--&#xA;-- The first Tuesday after the first Monday in November.&#xA; BEGIN TRY&#xA; DROP TABLE #tmpHoliday;&#xA; END TRY&#xA; BEGIN CATCH&#xA; --do nothing&#xA; END CATCH&#xA;&#xA; &#xA;&#xA;CREATE TABLE #tmpHoliday&#xA; (&#xA; ID     INT      IDENTITY (1, 1),&#xA; DateID INT     ,&#xA; Week   TINYINT ,&#xA; YEAR   CHAR (4),&#xA; DAY    CHAR (2)&#xA; );&#xA;&#xA; &#xA;&#xA;INSERT INTO #tmpHoliday (DateID, [YEAR], [DAY])&#xA; SELECT   [DateSK],&#xA; CalendarYearNumber,&#xA; [DAY]&#xA; FROM     dbo.DimDate&#xA; WHERE    [CalendarMonthNumber] = 11&#xA; AND [Dayofweek] = 'Monday'&#xA; ORDER BY CalendarYearNumber, [DAY];&#xA;&#xA; &#xA;&#xA;DECLARE @CNTR AS INT,&#xA; @POS AS INT,&#xA; @STARTYEAR AS INT,&#xA; @ENDYEAR AS INT,&#xA; @CURRENTYEAR AS INT,&#xA; @MINDAY AS INT;&#xA;&#xA; &#xA;&#xA;SELECT @CURRENTYEAR = MIN([YEAR]),&#xA; @STARTYEAR = MIN([YEAR]),&#xA; @ENDYEAR = MAX([YEAR])&#xA; FROM   #tmpHoliday;&#xA;&#xA; &#xA;&#xA;WHILE @CURRENTYEAR &lt;= @ENDYEAR&#xA; BEGIN&#xA; SELECT @CNTR = COUNT([YEAR])&#xA; FROM   #tmpHoliday&#xA; WHERE  [YEAR] = @CURRENTYEAR;&#xA; SET @POS = 1;&#xA; WHILE @POS &lt;= @CNTR&#xA; BEGIN&#xA; SELECT @MINDAY = MIN(DAY)&#xA; FROM   #tmpHoliday&#xA; WHERE  [YEAR] = @CURRENTYEAR&#xA; AND [WEEK] IS NULL;&#xA; UPDATE  #tmpHoliday&#xA; SET [WEEK] = @POS&#xA; WHERE   [YEAR] = @CURRENTYEAR&#xA; AND [DAY] = @MINDAY;&#xA; SELECT @POS = @POS + 1;&#xA; END&#xA; SELECT @CURRENTYEAR = @CURRENTYEAR + 1;&#xA; END&#xA;&#xA; &#xA;&#xA;UPDATE  DT&#xA; SET HolidayText = 'Election Day'&#xA; FROM    dbo.DimDate AS DT&#xA; INNER JOIN&#xA; #tmpHoliday AS HL&#xA; ON (HL.DateID + 1) = DT.DateSK&#xA; WHERE   [WEEK] = 1;&#xA;&#xA; &#xA;&#xA;DROP TABLE #tmpHoliday;&#xA;&#xA; &#xA; GO&#xA; PRINT CONVERT (VARCHAR, GETDATE(), 113); --USED FOR CHECKING RUN TIME.&#xA;&#xA; &#xA;&#xA;--DimDate indexes———————————————————————————————&#xA; CREATE UNIQUE NONCLUSTERED INDEX [IDX_DimDate_Date]&#xA; ON [dbo].[DimDate]([FullDate] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_Day]&#xA; ON [dbo].[DimDate]([Day] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_DayOfWeek]&#xA; ON [dbo].[DimDate]([DayOfWeek] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_DOWInMonth]&#xA; ON [dbo].[DimDate]([DayOfWeekInMonth] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_DayOfYear]&#xA; ON [dbo].[DimDate]([DayOfYearNumber] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_WeekOfYear]&#xA; ON [dbo].[DimDate]([WeekOfYearNumber] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_WeekOfMonth]&#xA; ON [dbo].[DimDate]([WeekOfMonthNumber] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_Month]&#xA; ON [dbo].[DimDate]([CalendarMonthNumber] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_MonthName]&#xA; ON [dbo].[DimDate]([CalendarMonthName] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_Quarter]&#xA; ON [dbo].[DimDate]([CalendarQuarterNumber] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_QuarterName]&#xA; ON [dbo].[DimDate]([CalendarQuarterName] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_DimDate_Year]&#xA; ON [dbo].[DimDate]([CalendarYearNumber] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;CREATE NONCLUSTERED INDEX [IDX_dim_Time_HolidayText]&#xA; ON [dbo].[DimDate]([HolidayText] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90)&#xA; ON [PRIMARY];&#xA;&#xA; &#xA;&#xA;PRINT CONVERT (VARCHAR, getdate(), 113); --USED FOR CHECKING RUN TIME&#xA;&#xA;&#xA;&#xA;&#xA;CREATE TABLE [dbo].[DimPromotion](&#xA;&#x9;[promotionKey] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,&#xA;&#x9;[promotionAlternateKey] [int] NULL,&#xA;&#x9;[EnglishPromotionName] [nvarchar](255) NULL,&#xA;&#x9;[SpanishPromotionName] [nvarchar](255) NULL,&#xA;&#x9;[FrenchPromotionName] [nvarchar](255) NULL,&#xA;&#x9;[DiscountPct] [float] NULL,&#xA;&#x9;[EnglishPromotionType] [nvarchar](50) NULL,&#xA;&#x9;[SpanishPromotionType] [nvarchar](50) NULL,&#xA;&#x9;[FrenchPromotionType] [nvarchar](50) NULL,&#xA;&#x9;[EnglishPromotionCategory] [nvarchar](50) NULL,&#xA;&#x9;[SpanishPromotionCategory] [nvarchar](50) NULL,&#xA;&#x9;[FrenchPromotionCategory] [nvarchar](50) NULL,&#xA;&#x9;[StartDate] [datetime] NULL,&#xA;&#x9;[EndDate] [datetime] NULL,&#xA;&#x9;[MinQty] [int] NULL,&#xA;&#x9;[MaxQty] [int] NULL&#xA;)&#xA;GO&#xA;&#xA;&#xA;CREATE TABLE [dbo].[DimCurrency](&#xA;&#x9;[CurrencyKey] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,&#xA;&#x9;[CurrencyAlternateKey] [nchar](3) NULL,&#xA;&#x9;[CurrencyName] [nvarchar](50))&#xA;&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[DimSalesTerritory](&#xA;&#x9;[SalesTerritoryKey] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,&#xA;&#x9;[SalesTerritoryAlternateKey] [int] NULL,&#xA;&#x9;[SalesTerritoryRegion] [nvarchar](50) NULL,&#xA;&#x9;[SalesTerritoryGroup] [nvarchar](50) NULL,&#xA;&#x9;[SalesTerritoryCountry] [nvarchar](50),&#xA; )&#xA;GO&#xA;&#xA;&#xA;CREATE TABLE [dbo].[Dimgeography](&#xA;&#x9;[GeographyKey] [int] IDENTITY(1,1) NOT NULL Primary key,&#xA;&#x9;[SalesTerritoryKey] [int] NULL  references [pfe_DWH].[dbo].[DimSalesTerritory](SalesTerritoryKey),&#xA;&#x9;[City] [nvarchar](30) NULL,&#xA;&#x9;[PostalCode] [nvarchar](15) NULL,&#xA;&#x9;[StateProvinceName] [nvarchar](50) NULL,&#xA;&#x9;[StateProvinceCode] [nvarchar](3) NULL,&#xA;&#x9;[CountryRegionCode] [nvarchar](3) NULL,&#xA;&#x9;[CountryRegionName] [nvarchar](50) NULL&#xA;)&#xA;GO&#xA;&#xA;&#xA;CREATE TABLE [dbo].[DimCustomer](&#xA;&#x9;[CustomerKey] [int] IDENTITY(1100,1)  primary key,&#xA;&#x9;[GeographyKey] [int] NULL references [pfe_DWH].[dbo].[Dimgeography](GeographyKey),&#xA;&#x9;[CustomerAlternateKey] [varchar](15)  NULL,&#xA;&#x9;[Title] [nvarchar](8) NULL,&#xA;&#x9;[FirstName] [nvarchar](50) NULL,&#xA;&#x9;[MiddleName] [nvarchar](50) NULL,&#xA;&#x9;[LastName] [nvarchar](50) NULL,&#xA;&#x9;[NameStyle] [bit] NULL,&#xA;&#x9;[BirthDate] [date] NULL,&#xA;&#x9;[MaritalStatus] [nchar](1),&#xA;&#x9;[Suffix] [nvarchar](10),&#xA;&#x9;[Gender] [nvarchar](1) NULL,&#xA;&#x9;[EmailAddress] [nvarchar](50) NULL,&#xA;&#x9;[YearlyIncome] [nvarchar](30) NULL,&#xA;&#x9;[TotalChildren] [tinyint] NULL,&#x9;&#xA;&#x9;[NumberChildrenAtHome] [tinyint] NULL,&#xA;&#x9;[EnglishEducation] [nvarchar](40) NULL,&#xA;&#x9;[EnglishOccupation] [nvarchar](100) NULL,&#xA;&#x9;[HouseOwnerFlag] [int] NULL,&#xA;&#x9;[NumberCarsOwned] [tinyint] NULL,&#xA;&#x9;[AddressLine1] [nvarchar](120) NULL,&#xA;&#x9;[AddressLine2] [nvarchar](120) NULL,&#xA;&#x9;[Phone] [nvarchar](25) NULL,&#x9;&#xA;&#x9;[DateFirstPurchase] [date] NULL&#xA;)&#xA;GO&#xA;&#xA;&#xA;CREATE TABLE [dbo].[DimReseller](&#xA;&#x9;[ResellerKey] [int] IDENTITY(1,1) NOT NULL Primary key,&#xA;&#x9;[GeographyKey] [int] NULL references [pfe_DWH].[dbo].[Dimgeography](GeographyKey),&#xA;&#x9;[ResellerAlternateKey] [varchar](10) NULL,&#xA;&#x9;[Phone]&#x9;[nvarchar](25) NULL,&#xA;&#x9;[ResellerName] [nvarchar](50) NULL,&#xA;&#x9;[NumberEmployees] [int] NULL,&#xA;&#x9;[AddressLine1] [nvarchar](60) NULL,&#x9;&#x9;&#x9;&#xA;&#x9;[AddressLine2] [nvarchar](60) NULL,&#xA;&#x9;[AnnualSales] [money] NULL,&#xA;&#x9;[AnnualRevenue] [money] NULL,&#xA;&#x9;[BankName] [nvarchar](50) NULL,&#xA;&#x9;[YearOpened] [int] NULL,&#xA;) &#xA;GO&#xA;&#xA;&#xA;&#xA;CREATE TABLE [dbo].[DimEmployee](&#xA;&#x9;[EmployeeKey] [int] IDENTITY(1,1) NOT NULL Primary key,&#xA;&#x9;[EmployeeNationalIDAlternateKey] [nvarchar](15) NULL,&#xA;&#x9;[SalesTerritoryKey] [int]  NULL references [pfe_DWH].[dbo].[DimSalesTerritory](SalesTerritoryKey),&#xA;&#x9;[FirstName] [nvarchar] (50)&#x9;NULL,&#xA;&#x9;[LastName] [nvarchar] (50)&#x9;NULL,&#xA;&#x9;[MiddleName] [nvarchar] (50) NULL,&#xA;&#x9;[NameStyle] [bit] NULL,&#xA;&#x9;[Title] [nvarchar] (50) null,&#xA;&#x9;[HireDate] [date] null,&#xA;&#x9;[BirthDate] [date] null,&#xA;&#x9;[LoginID] [nvarchar](256) null,&#xA;&#x9;[EmailAddress] [nvarchar](50) null,&#xA;&#x9;[phone] [nvarchar](25) null,&#xA;&#x9;[MaritalStatus] [nvarchar](1) null,&#xA;&#x9;[EmergencyContactName][nvarchar](50) null,&#xA;&#x9;[EmergencyContactPhone][nvarchar](25) null,&#xA;&#x9;[SalariedFlag][bit] NULL,&#xA;&#x9;[Gender][nvarchar](1) null,&#xA;&#x9;[PayFrequency][tinyint] null,&#xA;&#x9;[BaseRate] [money] null,&#xA;&#x9;[VacationHours][smallint] null,&#xA;&#x9;[SickLeaveHours][smallint] null,&#xA;&#x9;[CurrentFlag][bit] NULL,&#xA;&#x9;[DepartmentName] [nvarchar](50) null,&#xA;&#x9;[StartDate] [date] null,&#xA;&#x9;[EndDate][date] null,&#xA;&#x9;[Status] [nvarchar](50) null,&#xA;)&#xA;GO&#xA;&#xA;&#xA;CREATE TABLE [dbo].[DimProductCategorie](&#xA;&#x9;[ProductCategoryKey] [int] IDENTITY(1,1) NOT NULL primary key ,&#xA;&#x9;[ProductCategoryAlternateKey] [int] NULL,&#xA;&#x9;[EnglishProductCategoryName] [nvarchar](50) NULL&#xA;) &#xA;GO&#xA;&#xA;&#xA;CREATE TABLE [dbo].[DimProductSubcategory](&#xA;[ProductSubcategoryKey] [int] IDENTITY(1,1) NOT NULL primary key,&#xA;&#x9;[ProductSubcategoryAlternateKey] [int] NULL,&#xA;&#x9;[EnglishProductSubcategoryName] [nvarchar](50) NULL,&#xA;&#x9;[ProductCategoryKey] [int] null references [pfe_DWH].[dbo].[DimProductCategorie](ProductCategoryKey),&#xA;)&#xA;GO&#xA;&#xA;&#xA;&#xA;CREATE TABLE [dbo].[DimProduct]( &#xA;&#x9;[ProductKey] [int] IDENTITY(1,1) NOT NULL primary key,&#xA;&#x9;[ProductAlternateKey] [nvarchar](25) NULL ,&#xA;&#x9;[ProductSubcategoryKey] [int] NULL references [pfe_DWH].[dbo].[DimProductSubcategory] (ProductSubcategoryKey),&#xA;&#x9;[WeightUnitMeasureCode] [nchar](3) NULL,&#xA;&#x9;[SizeUnitMeasureCode] [nchar](3) NULL,&#xA;&#x9;[EnglishProductName] [nvarchar] (50) NULL,&#xA;&#x9;[StandardCost] [money] NULL,&#xA;&#x9;[FinishedGoodsFlag] [bit] NOT NULL,&#xA;&#x9;[Color] [nvarchar](15) NULL,&#xA;&#x9;[SafetyStockLevel] [smallint] NULL,&#xA;&#x9;[ReorderPoint] [smallint] NULL,&#xA;&#x9;[ListPrice] [money] NULL,&#xA;&#x9;[Size] [nvarchar](50) NULL,&#xA;&#x9;[Weight] [float] NULL,&#xA;&#x9;[DaysToManufacture] [int] NULL,&#xA;&#x9;[ProductLine] [nchar](2) NULL,&#xA;&#x9;[DealerPrice] [money] NULL,&#xA;&#x9;[Class] [nchar](2) NULL,&#xA;&#x9;[Style] [nchar](2) NULL,&#xA;&#x9;[ModelName] [nvarchar](50) NULL,&#xA;&#x9;[LargePhoto] [varbinary](max) NULL,&#xA;&#x9;[Description] [nvarchar](400) NULL,&#xA;&#x9;[StartDate] [datetime] NULL,&#xA;&#x9;[EndDate] [datetime] NULL,&#xA;&#x9;[Status] [nvarchar](50) NULL&#xA;)&#xA;GO&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;CREATE TABLE [dbo].[FactInternetSales](&#xA;&#x9;[ProductKey] [int] references [pfe_DWH].[dbo].[DimProduct](ProductKey),&#xA;&#x9;[DateSK] [int] references [pfe_DWH].[dbo].[DimDate](DateSK),&#xA;&#x9;[CustomerKey] [int] references [pfe_DWH].[dbo].[DimCustomer](CustomerKey),&#xA;&#x9;[PromotionKey] [int] references [pfe_DWH].[dbo].[DimPromotion](PromotionKey),&#xA;&#x9;[CurrencyKey] [int] references [pfe_DWH].[dbo].[DimCurrency](CurrencyKey),&#xA;&#x9;[SalesTerritoryKey] [int] references [pfe_DWH].[dbo].[DimSalesTerritory](SalesTerritoryKey),&#xA;&#x9;[SalesOrderNumber] [nvarchar] (25) NOT NULL ,&#xA;&#x9;[SalesOrderLineNumber] [tinyint] NOT NULL,&#xA;&#x9;[RevisionNumber] [tinyint] NULL,&#xA;&#x9;[OrderQuantity] [smallint] NULL,&#xA;&#x9;[UnitPrice] [money] NULL,&#xA;&#x9;[ExtendedAmount] [money] NULL,&#x9;&#x9;&#xA;&#x9;[UnitPriceDiscountPct] [float] NULL,&#x9;&#x9;&#x9;&#xA;&#x9;[DiscountAmount] [float] NULL,&#xA;&#x9;[ProductStandardCost] [money] NULL,&#x9;&#x9;&#xA;&#x9;[TotalProductCost] [money] NULL,&#x9;&#x9;&#xA;&#x9;[SalesAmount] [money] NULL,&#xA;&#x9;[TaxAmt] [money] NULL,&#xA;&#x9;[Freight] [money] NULL,&#xA;&#x9;[CarrierTrackingNumber] [nvarchar] (25) NULL,&#x9;&#xA;&#x9;[CustomerPONumber] [nvarchar] (25) NULL,&#xA;&#x9;[OrderDate] [datetime] NULL,&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;[DueDate] [datetime] NULL,&#x9;&#xA;&#x9;[ShipDate] [datetime] NULL,&#xA;)&#xA;GO&#xA;&#xA;&#xA;CREATE TABLE [dbo].[FactSalesQuotas](&#xA;&#x9;[SalesQuotaKey] [int] IDENTITY(1,1) NOT NULL Primary key,&#xA;&#x9;[EmployeeKey] [int] references [pfe_DWH].[dbo].[DimEmployee](EmployeeKey),&#xA;&#x9;[DateSK] [int] references [pfe_DWH].[dbo].[DimDate](DateSK),&#xA;&#x9;[CalendarYear] [smallint],&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;[CalendarQuarter] [tinyint],&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;[SalesAmountQuota] [money],&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;[Date] [datetime]&#xA;)&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[FactCurrencyRate](&#xA;&#x9;[CurrencyKey] [int] references [pfe_DWH].[dbo].[DimCurrency](CurrencyKey),&#x9;&#xA;&#x9;[DateSK] [int] references [pfe_DWH].[dbo].[DimDate](DateSK),&#xA;&#x9;[AverageRate] [float],&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;[EndOfDayRate][float],&#x9;&#x9;&#x9;&#xA;&#x9;[Date] [datetime]&#xA;)&#xA;GO&#xA;&#xA;&#xA;CREATE TABLE [dbo].[FactResellerSales](&#xA;&#x9;[ProductKey] [int] references [pfe_DWH].[dbo].[DimProduct](ProductKey),&#xA;&#x9;[DateSK] [int] references [pfe_DWH].[dbo].[DimDate](DateSK),&#xA;&#x9;[ResellerKey] [int] references [pfe_DWH].[dbo].[DimReseller](ResellerKey),&#xA;&#x9;[EmployeeKey] [int] references [pfe_DWH].[dbo].[DimEmployee](EmployeeKey),&#xA;&#x9;[PromotionKey] [int] references [pfe_DWH].[dbo].[DimPromotion](PromotionKey),&#xA;&#x9;[CurrencyKey] [int] references [pfe_DWH].[dbo].[DimCurrency](CurrencyKey),&#xA;&#x9;[SalesTerritoryKey] [int] references [pfe_DWH].[dbo].[DimSalesTerritory](SalesTerritoryKey),&#xA;&#x9;[SalesOrderNumber] [nvarchar] (25)&#x9;NULL,&#x9;&#x9;&#xA;&#x9;[SalesOrderLineNumber] [tinyint] NULL,&#xA;&#x9;[RevisionNumber] [tinyint] NULL,&#xA;&#x9;[OrderQuantity] [smallint] NULL,&#xA;&#x9;[UnitPrice] [money] NULL,&#xA;&#x9;[ExtendedAmount] [money] NULL,&#x9;&#x9;&#xA;&#x9;[UnitPriceDiscountPct] [float] NULL,&#x9;&#x9;&#x9;&#xA;&#x9;[DiscountAmount] [float] NULL,&#xA;&#x9;[ProductStandardCost] [money] NULL,&#x9;&#x9;&#xA;&#x9;[TotalProductCost] [money] NULL,&#x9;&#x9;&#xA;&#x9;[SalesAmount] [money] NULL,&#xA;&#x9;[TaxAmt] [money] NULL,&#xA;&#x9;[Freight] [money] NULL,&#xA;&#x9;[CarrierTrackingNumber] [nvarchar] (25) NULL,&#x9;&#xA;&#x9;[CustomerPONumber] [nvarchar] (25) NULL,&#xA;&#x9;[OrderDate] [datetime] NULL,&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;[DueDate] [datetime] NULL,&#x9;&#xA;&#x9;[ShipDate] [datetime] NULL&#xA;)&#xA;GO&#xA;&#x9;&#xA;&#x9;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DROP TABLE"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E39247D2-3BDA-4418-8FEF-4F9F4532A25F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DROP TABLE"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6A6FEE0D-9800-4F35-AE71-C147942857DE}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="DROP TABLE FactInternetSales;&#xA;DROP TABLE FactResellerSales;&#xA;DROP TABLE FactCurrencyRate;&#xA;DROP TABLE FactSalesQuotas;&#xA;DROP TABLE DimProduct;&#xA;DROP TABLE DimProductSubCategory;&#xA;DROP TABLE DimProductCategorie&#xA;DROP TABLE DimEmployee;&#xA;DROP TABLE DimReseller;&#xA;DROP TABLE DimCustomer;&#xA;DROP TABLE Dimgeography;&#xA;DROP TABLE DimSalesTerritory;&#xA;DROP TABLE DimPromotion;&#xA;DROP TABLE DimCurrency;&#xA;DROP TABLE DimDate;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{322D6C7E-2993-46EB-B765-EC46B1154FD7}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimCurrency"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{40B748BA-2130-4815-A4D2-0AD6D0127648}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimCurrency"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimCurrency.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimCustomer"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{F19D1B3B-3235-4123-B403-53F9185C3C39}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimCustomer"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimCustomer.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimEmployee"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{E1661E45-C036-4C66-BF97-1693475D29B9}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimEmployee"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimEmployee.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimGeography"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{3C43A510-D823-4212-8708-1F5D57F658D3}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimGeography"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimGeography.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimProduct"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{2AE0FEC4-69A1-4936-AF6F-DD3842103B2D}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimProduct"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimProduct.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimProductCategorie"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{AB70DDA5-A30F-40FE-B0DF-C8B53217F2A8}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimProductCategorie"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimProductCategorie.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimProductSubCategory"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{B9361631-832F-4F86-904D-1EAB652F7186}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimProductSubCategory"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimProductSubcategory.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimPromotion"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{865AC53E-6DA4-4A6B-A641-D798DC82D5A1}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimPromotion"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimPromotion.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimReseller"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{744B53AC-360C-4976-B87B-0D26DE7118C8}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimReseller"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimReseller.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\DimSalesTerritory"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{67E01DE0-3FC9-4A25-AE3A-A82A858D56AA}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimSalesTerritory"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DimSalesTerritory.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\FactCurrencyRate"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{B0F00D3F-A9E8-4EFE-A29E-0301073C21E6}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FactCurrencyRate"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>FactCurrencyRate.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\FactInternetSales"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{E446E048-B218-45AA-8FBD-10C8301FD514}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FactInternetSales"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>FactInternetSales.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\FactResellerSales"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{F105C461-D0E2-41AC-8539-84885CC22E16}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FactResellerSales"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>FactResellerSales.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\FactSalesQuotas"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{16F0BB0C-D0EF-4613-AEF9-1E76EF4D5698}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FactSalesQuotas"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>FactSalesQuotas.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{55426D13-59FD-4B1C-8E25-6ECCE8D6F0AA}"
+          DTS:From="Package\Sequence Container\DimSalesTerritory"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\DimGeography" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{68DB0878-0FED-4F5A-ABB8-46CBA2EBE67E}"
+          DTS:From="Package\Sequence Container\DimSalesTerritory"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\DimEmployee" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 10]"
+          DTS:CreationName=""
+          DTS:DTSID="{05C761DF-C91F-4C28-8BB6-B0697524D6B6}"
+          DTS:From="Package\Sequence Container\DimReseller"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 10"
+          DTS:To="Package\Sequence Container\FactResellerSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 11]"
+          DTS:CreationName=""
+          DTS:DTSID="{3AE3BE19-B56E-4367-9131-4F2E98EEBC8A}"
+          DTS:From="Package\Sequence Container\DimSalesTerritory"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 11"
+          DTS:To="Package\Sequence Container\FactResellerSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 12]"
+          DTS:CreationName=""
+          DTS:DTSID="{709228F8-C0D5-42F8-833A-F109338BFA1B}"
+          DTS:From="Package\Sequence Container\DimEmployee"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 12"
+          DTS:To="Package\Sequence Container\FactResellerSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 13]"
+          DTS:CreationName=""
+          DTS:DTSID="{B6E6C30C-E05D-48EE-BE07-7085F3FF4B9C}"
+          DTS:From="Package\Sequence Container\DimCustomer"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 13"
+          DTS:To="Package\Sequence Container\FactInternetSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 14]"
+          DTS:CreationName=""
+          DTS:DTSID="{7A41145B-BFE6-4B23-BC7E-9A4C31C8B3DC}"
+          DTS:From="Package\Sequence Container\DimSalesTerritory"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 14"
+          DTS:To="Package\Sequence Container\FactInternetSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 15]"
+          DTS:CreationName=""
+          DTS:DTSID="{EE3C1EC7-0F27-44C0-9B89-F6E52B52ADFC}"
+          DTS:From="Package\Sequence Container\DimPromotion"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 15"
+          DTS:To="Package\Sequence Container\FactInternetSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
+          DTS:CreationName=""
+          DTS:DTSID="{65322277-4E84-4373-81A8-D06B6EFD8093}"
+          DTS:From="Package\Sequence Container\DimProduct"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 16"
+          DTS:To="Package\Sequence Container\FactInternetSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 17]"
+          DTS:CreationName=""
+          DTS:DTSID="{9AE34F16-18B6-44F2-8F13-FD1445CC90DB}"
+          DTS:From="Package\Sequence Container\DimCurrency"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 17"
+          DTS:To="Package\Sequence Container\FactInternetSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 18]"
+          DTS:CreationName=""
+          DTS:DTSID="{5DA662F1-EB72-43D4-8B3C-84BA0FB374FD}"
+          DTS:From="Package\Sequence Container\DimEmployee"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 18"
+          DTS:To="Package\Sequence Container\FactSalesQuotas" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{1D6C8D49-C0E3-49CD-82D4-BFF38D3DF919}"
+          DTS:From="Package\Sequence Container\DimGeography"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\DimReseller" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{5BF5E4D6-D448-424A-8E40-79660F259FD4}"
+          DTS:From="Package\Sequence Container\DimGeography"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sequence Container\DimCustomer" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{17E9B74F-10FA-4712-9D10-E38B4B32B96F}"
+          DTS:From="Package\Sequence Container\DimProductCategorie"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Sequence Container\DimProductSubCategory" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{E3C5F79B-5B0A-4759-A5E2-671656FE7AFC}"
+          DTS:From="Package\Sequence Container\DimProductSubCategory"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Sequence Container\DimProduct" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{50676219-7417-4499-9CDB-76CFD098CF29}"
+          DTS:From="Package\Sequence Container\DimPromotion"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Sequence Container\FactResellerSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{57FC2AA7-D0EF-4778-B901-306B5E7F72E9}"
+          DTS:From="Package\Sequence Container\DimCurrency"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Sequence Container\FactResellerSales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{2CDF9B3A-678B-4B59-87B1-73F231D84E63}"
+          DTS:From="Package\Sequence Container\DimCurrency"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Sequence Container\FactCurrencyRate" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 9]"
+          DTS:CreationName=""
+          DTS:DTSID="{5B928761-5222-4FAD-A534-40A59D65BF5A}"
+          DTS:From="Package\Sequence Container\DimProduct"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 9"
+          DTS:To="Package\Sequence Container\FactResellerSales" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2F328147-02F4-4CEB-8556-556B43219F79}"
+      DTS:From="Package\DROP TABLE"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\CREATE TABLE" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{124D91E6-5018-46D2-AA60-70C9CC13F942}"
+      DTS:From="Package\CREATE TABLE"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Sequence Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\CREATE TABLE"
+          TopLeft="308.888888888889,50.4444444444444" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\DROP TABLE"
+          TopLeft="77.8888888888889,51.1111111111111" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Sequence Container\DimCurrency"
+          TopLeft="230,19" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Sequence Container\DimCustomer"
+          TopLeft="383,274" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Sequence Container\DimEmployee"
+          TopLeft="579,90" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Sequence Container\DimGeography"
+          TopLeft="567,279" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Sequence Container\DimProduct"
+          TopLeft="40,204" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Sequence Container\DimProductCategorie"
+          TopLeft="16,360" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Sequence Container\DimProductSubCategory"
+          TopLeft="5.5,281" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Sequence Container\DimPromotion"
+          TopLeft="67,80" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Sequence Container\DimReseller"
+          TopLeft="251,357" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Sequence Container\DimSalesTerritory"
+          TopLeft="566,210" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Sequence Container\FactCurrencyRate"
+          TopLeft="28,22" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Sequence Container\FactInternetSales"
+          TopLeft="373,75" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Sequence Container\FactResellerSales"
+          TopLeft="218,207" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Sequence Container\FactSalesQuotas"
+          TopLeft="569,16" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="644.25,252">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="672.833333333333,210">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-78"
+              Start="0,0"
+              End="0,-70.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-70.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 10]"
+          TopLeft="297.666666666667,357">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-108"
+              Start="0,0"
+              End="0,-100.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-100.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 11]"
+          TopLeft="566,229.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-188,0"
+              Start="0,0"
+              End="-180.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-180.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 12]"
+          TopLeft="628,132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-292,75"
+              Start="0,0"
+              End="-292,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.4671385237614" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38.4671385237614"
+                    Point2="0,42.4671385237614"
+                    Point3="-4,42.4671385237614" />
+                  <mssgle:LineSegment
+                    End="-288,42.4671385237614" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-288,42.4671385237614"
+                    Point2="-292,42.4671385237614"
+                    Point3="-292,46.4671385237614" />
+                  <mssgle:LineSegment
+                    End="-292,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 13]"
+          TopLeft="454,274">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-157"
+              Start="0,0"
+              End="0,-149.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-149.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 14]"
+          TopLeft="621.333333333333,210">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-129.583333333333,-93"
+              Start="0,0"
+              End="-129.583333333333,-85.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-48.592981305346" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-48.592981305346"
+                    Point2="0,-52.592981305346"
+                    Point3="-4,-52.592981305346" />
+                  <mssgle:LineSegment
+                    End="-125.583333333333,-52.592981305346" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-125.583333333333,-52.592981305346"
+                    Point2="-129.583333333333,-52.592981305346"
+                    Point3="-129.583333333333,-56.592981305346" />
+                  <mssgle:LineSegment
+                    End="-129.583333333333,-85.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 15]"
+          TopLeft="213,98.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="160,0"
+              Start="0,0"
+              End="152.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="152.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
+          TopLeft="106.5,204">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="308.75,-87"
+              Start="0,0"
+              End="308.75,-79.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-53.0549898167006" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-53.0549898167006"
+                    Point2="0,-57.0549898167006"
+                    Point3="4,-57.0549898167006" />
+                  <mssgle:LineSegment
+                    End="304.75,-57.0549898167006" />
+                  <mssgle:CubicBezierSegment
+                    Point1="304.75,-57.0549898167006"
+                    Point2="308.75,-57.0549898167006"
+                    Point3="308.75,-61.0549898167006" />
+                  <mssgle:LineSegment
+                    End="308.75,-79.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 17]"
+          TopLeft="369,40">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="84.5,35"
+              Start="0,0"
+              End="84.5,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="80.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="80.5,0"
+                    Point2="84.5,0"
+                    Point3="84.5,4" />
+                  <mssgle:LineSegment
+                    End="84.5,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 18]"
+          TopLeft="648.75,90">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-32"
+              Start="0,0"
+              End="0,-24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="641.5,321">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-301.833333333333,36"
+              Start="0,0"
+              End="-301.833333333333,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.3469985358712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.3469985358712"
+                    Point2="0,21.3469985358712"
+                    Point3="-4,21.3469985358712" />
+                  <mssgle:LineSegment
+                    End="-297.833333333333,21.3469985358712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-297.833333333333,21.3469985358712"
+                    Point2="-301.833333333333,21.3469985358712"
+                    Point3="-301.833333333333,25.3469985358712" />
+                  <mssgle:LineSegment
+                    End="-301.833333333333,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="567,294.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-41,0"
+              Start="0,0"
+              End="-33.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-33.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="103.5,360">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-37"
+              Start="0,0"
+              End="0,-29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          TopLeft="104.25,281">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-35"
+              Start="0,0"
+              End="0,-27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
+          TopLeft="140,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="120,85"
+              Start="0,0"
+              End="120,77.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.7377049180328" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51.7377049180328"
+                    Point2="0,55.7377049180328"
+                    Point3="4,55.7377049180328" />
+                  <mssgle:LineSegment
+                    End="116,55.7377049180328" />
+                  <mssgle:CubicBezierSegment
+                    Point1="116,55.7377049180328"
+                    Point2="120,55.7377049180328"
+                    Point3="120,59.7377049180328" />
+                  <mssgle:LineSegment
+                    End="120,77.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
+          TopLeft="298.75,61">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,146"
+              Start="0,0"
+              End="0,138.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,138.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 8]"
+          TopLeft="230,41.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-40,0"
+              Start="0,0"
+              End="-32.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-32.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 9]"
+          TopLeft="173,226.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45,0"
+              Start="0,0"
+              End="37.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="37.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="747,457"
+          Size="747,500"
+          Id="Package\Sequence Container"
+          TopLeft="12.4444444444445,125.333333333333" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="217.888888888889,71.7777777777778">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91,0"
+              Start="0,0"
+              End="83.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="83.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="384.916666666667,92.4444444444444">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.8888888888889"
+              Start="0,0"
+              End="0,25.3888888888889">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.3888888888889" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

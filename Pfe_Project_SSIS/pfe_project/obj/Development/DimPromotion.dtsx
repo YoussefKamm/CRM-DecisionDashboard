@@ -1,0 +1,2069 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/13/2024 5:47:05 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-U58L4FM"
+  DTS:CreatorName="DESKTOP-U58L4FM\ASUS"
+  DTS:DTSID="{C53F45A5-9839-48E0-8C6F-50F137395AE8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5397.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="120"
+  DTS:VersionGUID="{7D68F6B0-8178-4CF7-AC70-4C45DEE78C23}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7C679D04-DC44-45C1-A217-A79987A95BD5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FrenchPromotionCategory">
+      <DTS:VariableValue
+        DTS:DataType="18">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BA50F8A5-18F0-4A01-8FD7-61509CCA7840}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FrenchPromotionName">
+      <DTS:VariableValue
+        DTS:DataType="18">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F4F22A9C-9422-4B3F-98DD-968F4D326AAA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FrenchPromotionType">
+      <DTS:VariableValue
+        DTS:DataType="18">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{185DA314-A73B-47B2-9EFE-6875582AD708}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SpanishPromotionCategory">
+      <DTS:VariableValue
+        DTS:DataType="18">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CBE38B9E-B10B-4444-B997-D85E87558380}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SpanishPromotionName">
+      <DTS:VariableValue
+        DTS:DataType="18">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{004C8A3A-34C6-4833-B8C7-EC9AE1258962}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SpanishPromotionType">
+      <DTS:VariableValue
+        DTS:DataType="18">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CE088A10-7A18-4397-89A7-CDE3076C358D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\DimPromotion"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DimPromotion"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimPromotion]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\DimPromotion.Connections[OleDbConnection]"
+                  connectionManagerID="{6A6FEE0D-9800-4F35-AE71-C147942857DE}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.pfe_DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[EnglishPromotionName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EnglishPromotionName"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[EnglishPromotionName]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[EnglishPromotionType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EnglishPromotionType"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[EnglishPromotionType]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[EnglishPromotionCategory]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EnglishPromotionCategory"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[EnglishPromotionCategory]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionCategory]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[StartDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StartDate"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[StartDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[EndDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EndDate"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EndDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[MinQty]"
+                      cachedDataType="i4"
+                      cachedName="MinQty"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[MinQty]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[MinQty]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[MaxQty]"
+                      cachedDataType="i4"
+                      cachedName="MaxQty"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[MaxQty]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[MaxQty]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[SpecialOfferID]"
+                      cachedDataType="i4"
+                      cachedName="SpecialOfferID"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[promotionAlternateKey]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[SpecialOfferID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[SpanishPromotionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="SpanishPromotionName"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[SpanishPromotionName]"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishPromotionName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[FrenchPromotionName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FrenchPromotionName"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[FrenchPromotionName]"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchPromotionName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[DiscountPct]"
+                      cachedDataType="cy"
+                      cachedName="DiscountPct"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[DiscountPct]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[DiscountPct]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[SpanishType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="SpanishType"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[SpanishPromotionType]"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[FrenchType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FrenchType"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[FrenchPromotionType]"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[SpanishCategory]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="SpanishCategory"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[SpanishPromotionCategory]"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishCategory]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].Columns[FrenchCategory]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FrenchCategory"
+                      externalMetadataColumnId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[FrenchPromotionCategory]"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchCategory]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[promotionKey]"
+                      dataType="i4"
+                      name="promotionKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[promotionAlternateKey]"
+                      dataType="i4"
+                      name="promotionAlternateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[EnglishPromotionName]"
+                      dataType="wstr"
+                      length="255"
+                      name="EnglishPromotionName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[EnglishPromotionType]"
+                      dataType="wstr"
+                      length="50"
+                      name="EnglishPromotionType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[EnglishPromotionCategory]"
+                      dataType="wstr"
+                      length="50"
+                      name="EnglishPromotionCategory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                      dataType="dbTimeStamp"
+                      name="StartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
+                      dataType="dbTimeStamp"
+                      name="EndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[MinQty]"
+                      dataType="i4"
+                      name="MinQty" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[MaxQty]"
+                      dataType="i4"
+                      name="MaxQty" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[SpanishPromotionName]"
+                      dataType="wstr"
+                      length="255"
+                      name="SpanishPromotionName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[FrenchPromotionName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FrenchPromotionName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[DiscountPct]"
+                      dataType="r8"
+                      name="DiscountPct" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[SpanishPromotionType]"
+                      dataType="wstr"
+                      length="50"
+                      name="SpanishPromotionType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[FrenchPromotionType]"
+                      dataType="wstr"
+                      length="50"
+                      name="FrenchPromotionType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[SpanishPromotionCategory]"
+                      dataType="wstr"
+                      length="50"
+                      name="SpanishPromotionCategory" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input].ExternalColumns[FrenchPromotionCategory]"
+                      dataType="wstr"
+                      length="50"
+                      name="FrenchPromotionCategory" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\DimPromotion.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DimPromotion.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DimPromotion.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DimPromotion.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Script Component"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;13"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="Script Component"
+              version="13">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="30">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public override void ProcessInput(int InputID, string InputName, PipelineBuffer Buffer, OutputNameMap OutputMap)
+    {
+
+        if (InputName.Equals(@"Input 0", StringComparison.Ordinal))
+        {
+            Input0_ProcessInput(new Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap));
+        }
+
+    }
+
+    public virtual void Input0_ProcessInput(Input0Buffer Buffer)
+    {
+        while (Buffer.NextRow())
+        {
+            Input0_ProcessInputRow(Buffer);
+        }
+    }
+
+    public virtual void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Collections.Generic;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection);
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called once for every row that passes through the component from Input0.
+    ///
+    /// Example of reading a value from a column in the the row:
+    ///  string zipCode = Row.ZipCode
+    ///
+    /// Example of writing a value to a column in the row:
+    ///  Row.ZipCode = zipCode
+    /// </summary>
+    /// <param name="Row">The row that is currently passing through the component</param>
+    public override void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+        if(Row.EnglishPromotionName == "No Discount")
+        {
+            Row.SpanishPromotionName = "Sin descuento";
+            Row.SpanishType = "Sin descuento";
+            Row.SpanishCategory = "Sin descuento";
+            Row.FrenchPromotionName = "Aucune remise";
+            Row.FrenchCategory = "Aucune remise";
+            Row.FrenchType = "Aucune remise";
+        }
+        else if (Row.EnglishPromotionName == "Volume Discount 11 to 14")
+        {
+            Row.SpanishPromotionName = "Descuento por volumen (entre 11 y 14)";
+            Row.FrenchPromotionName = "Remise sur quantité (de 11 à 14)";
+        }
+        else if (Row.EnglishPromotionName == "Volume Discount 15 to 24")
+        {
+            Row.SpanishPromotionName = "Descuento por volumen (entre 15 y 24)";
+            Row.FrenchPromotionName = "Remise sur quantité (de 15 à 24)";
+        }
+        else if (Row.EnglishPromotionName == "Volume Discount 25 to 40")
+        {
+            Row.SpanishPromotionName = "Descuento por volumen (entre 25 y 40)";
+            Row.FrenchPromotionName = "Remise sur quantité (de 25 à 40)";
+        }
+        else if (Row.EnglishPromotionName == "Volume Discount 41 to 60")
+        {
+            Row.SpanishPromotionName = "Descuento por volumen (entre 41 y 60)";
+            Row.FrenchPromotionName = "Remise sur quantité (de 41 à 60)";
+        }
+        else if (Row.EnglishPromotionName == "Volume Discount over 60")
+        {
+            Row.SpanishPromotionName = "Descuento por volumen (más de 60)";
+            Row.FrenchPromotionName = "Remise sur quantité (au-delà de 60)";
+        }
+        else if (Row.EnglishPromotionName == "Mountain-100 Clearance Sale")
+        {
+            Row.SpanishPromotionName = "Liquidación de bicicleta de montaña, 100";
+            Row.FrenchPromotionName = "Liquidation VTT 100";
+        }
+        else if (Row.EnglishPromotionName == "Sport Helmet Discount-2002")
+        {
+            Row.SpanishPromotionName = "Casco deportivo, descuento: 2002";
+            Row.FrenchPromotionName = "Remise sur les casques sport - 2002";
+        }
+        else if (Row.EnglishPromotionName == "Road-650 Overstock")
+        {
+            Row.SpanishPromotionName = "Bicicleta de carretera: 650, oferta especial";
+            Row.FrenchPromotionName = "Déstockage Vélo de route 650";
+        }
+        else if (Row.EnglishPromotionName == "Mountain Tire Sale")
+        {
+            Row.SpanishPromotionName = "Oferta de cubierta de montaña";
+            Row.FrenchPromotionName = "Vente de pneus de VTT";
+        }
+        else if (Row.EnglishPromotionName == "Sport Helmet Discount-2003")
+        {
+            Row.SpanishPromotionName = "Casco deportivo, descuento: 2003";
+            Row.FrenchPromotionName = "Remise sur les casques sport - 2003";
+        }
+        else if (Row.EnglishPromotionName == "LL Road Frame Sale")
+        {
+            Row.SpanishPromotionName = "Oferta de cuadro de carretera GB";
+            Row.FrenchPromotionName = "Vente de cadres de vélo de route LL";
+        }
+        else if (Row.EnglishPromotionName == "Touring-1000 Promotion")
+        {
+            Row.SpanishPromotionName = "Promoción ‘Touring-1000’";
+            Row.FrenchPromotionName = "Promotion “Touring-1000”";
+        }
+        else if (Row.EnglishPromotionName == "Touring-3000 Promotion")
+        {
+            Row.SpanishPromotionName = "Promoción ‘Touring-3000’";
+            Row.FrenchPromotionName = "Promotion “Touring-3000”";
+        }
+        else if (Row.EnglishPromotionName == "Half-Price Pedal Sale")
+        {
+            Row.SpanishPromotionName = "Venta de pedales a mitad de precio";
+            Row.FrenchPromotionName = "Pédales à moitié prix";
+        }
+        else if (Row.EnglishPromotionName == "Mountain-500 Silver Clearance Sale")
+        {
+            Row.SpanishPromotionName = "Liquidación de bicicleta de montaña, 500, plateada";
+            Row.FrenchPromotionName = "Liquidation VTT 500 argent";
+        }
+        if (Row.EnglishPromotionType == "Volume Discount")
+        {
+            Row.SpanishType = "Descuento por volumen";
+            Row.FrenchType = "Remise sur quantité";
+        }
+        else if (Row.EnglishPromotionType == "Discontinued Product")
+        {
+            Row.SpanishType = "Descatalogado";
+            Row.FrenchType = "Ce produit n'est plus commercialisé";
+        }
+        else if (Row.EnglishPromotionType == "Seasonal Discount")
+        {
+            Row.SpanishType = "Descuento de temporada";
+            Row.FrenchType = "Remise saisonnière";
+        }
+        else if (Row.EnglishPromotionType == "Excess Inventory")
+        {
+            Row.SpanishType = "Inventario excedente";
+            Row.FrenchType = "Déstockage";
+        }
+        else if (Row.EnglishPromotionType == "New Product")
+        {
+            Row.SpanishType = "Producto Nuevo";
+            Row.FrenchType = "Nouveau produit";
+        }
+
+        if (Row.EnglishPromotionCategory == "Reseller")
+        {
+            Row.SpanishCategory = "Distribuidor";
+            Row.FrenchCategory = "Revendeur";
+        }
+        else if (Row.EnglishPromotionCategory == "Customer")
+        {
+            Row.SpanishCategory = "Cliente";
+            Row.FrenchCategory = "Client";
+        }
+    }
+
+    
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Input0Buffer: ScriptBuffer
+
+{
+    public Input0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String EnglishPromotionName
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[0]);
+        }
+    }
+    public bool EnglishPromotionName_IsNull
+    {
+        get
+        {
+            return IsNull(0);
+        }
+    }
+
+    public String EnglishPromotionType
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[1]);
+        }
+    }
+    public bool EnglishPromotionType_IsNull
+    {
+        get
+        {
+            return IsNull(1);
+        }
+    }
+
+    public String EnglishPromotionCategory
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[2]);
+        }
+    }
+    public bool EnglishPromotionCategory_IsNull
+    {
+        get
+        {
+            return IsNull(2);
+        }
+    }
+
+    public String FrenchPromotionName
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool FrenchPromotionName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String SpanishPromotionName
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool SpanishPromotionName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String SpanishType
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool SpanishType_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String FrenchType
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool FrenchType_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String SpanishCategory
+    {
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool SpanishCategory_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String FrenchCategory
+    {
+        set
+        {
+            this[8] = value;
+        }
+    }
+    public bool FrenchCategory_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(8);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public bool NextRow()
+    {
+        return base.NextRow();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_12a527c1b300449d99d70b684c99c7ca.Properties.Settings.get_Default():SC_12a527c1b300449d99d70b684c99c7ca.Properties.Sett" +
+    "ings")]
+
+namespace SC_12a527c1b300449d99d70b684c99c7ca.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_12a527c1b300449d99d70b684c99c7ca.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{722bc1ca-5bc0-48c5-ab72-8892a3f27d6d}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_12a527c1b300449d99d70b684c99c7ca</RootNamespace>
+    <AssemblyName>SC_12a527c1b300449d99d70b684c99c7ca</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptComponent" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="ScriptComponent" GeneratedNamespace="SC_12a527c1b300449d99d70b684c99c7ca" IconIndex="0"></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC160</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>SC_12a527c1b300449d99d70b684c99c7ca</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>SC_12a527c1b300449d99d70b684c99c7ca</msb:DisplayName>
+    <msb:ProjectId>{625831FD-B70D-441F-9208-B012DE78B710}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="SC_12a527c1b300449d99d70b684c99c7ca.csproj" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="main.cs" />
+    <msb:File Include="BufferWrapper.cs" />
+    <msb:File Include="ComponentWrapper.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_12a527c1b300449d99d70b684c99c7ca")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_12a527c1b300449d99d70b684c99c7ca")]
+[assembly: AssemblyCopyright("Copyright @  2024")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_12a527c1b300449d99d70b684c99c7ca.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_12a527c1b300449d99d70b684c99c7ca.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_12a527c1b300449d99d70b684c99c7ca.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_12a527c1b300449d99d70b684c99c7ca.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_12a527c1b300449d99d70b684c99c7ca.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_12a527c1b300449d99d70b684c99c7ca.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAFs9HmYAAAAAAAAAAOAAIiALATAAACgAAAAIAAAAAAAAPkcA
+AAAgAAAAYAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACgAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAOxGAABPAAAAAGAAAEgEAAAAAAAAAAAAAAAAAAAA
+AAAAAIAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAARCcAAAAgAAAAKAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAYAAAAAYAAAAqAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAIAAAAACAAAAMAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAg
+RwAAAAAAAEgAAAACAAUAmCYAAJwfAAABAAAAAAAAADRGAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKBAAAAoqHgIoEQAACioTMAIAEwQAAAAAAAADbwYAAAZy
+AQAAcCgSAAAKLEcDchkAAHBvDgAABgNyGQAAcG8QAAAGA3IZAABwbxQAAAYDcjUAAHBvDAAABgNy
+NQAAcG8WAAAGA3I1AABwbxIAAAY4lQIAAANvBgAABnJRAABwKBIAAAosGwNygwAAcG8OAAAGA3LP
+AABwbwwAAAY4aAIAAANvBgAABnIRAQBwKBIAAAosGwNyQwEAcG8OAAAGA3KPAQBwbwwAAAY4OwIA
+AANvBgAABnLRAQBwKBIAAAosGwNyAwIAcG8OAAAGA3JPAgBwbwwAAAY4DgIAAANvBgAABnKRAgBw
+KBIAAAosGwNywwIAcG8OAAAGA3IPAwBwbwwAAAY44QEAAANvBgAABnJRAwBwKBIAAAosGwNygQMA
+cG8OAAAGA3LFAwBwbwwAAAY4tAEAAANvBgAABnINBABwKBIAAAosGwNyRQQAcG8OAAAGA3KXBABw
+bwwAAAY4hwEAAANvBgAABnK/BABwKBIAAAosGwNy9QQAcG8OAAAGA3I3BQBwbwwAAAY4WgEAAANv
+BgAABnJ/BQBwKBIAAAosGwNypQUAcG8OAAAGA3L/BQBwbwwAAAY4LQEAAANvBgAABnI5BgBwKBIA
+AAosGwNyXwYAcG8OAAAGA3KbBgBwbwwAAAY4AAEAAANvBgAABnLHBgBwKBIAAAosGwNy/QYAcG8O
+AAAGA3I/BwBwbwwAAAY40wAAAANvBgAABnKHBwBwKBIAAAosGwNyrQcAcG8OAAAGA3LvBwBwbwwA
+AAY4pgAAAANvBgAABnI3CABwKBIAAAosGANyZQgAcG8OAAAGA3KXCABwbwwAAAYrfANvBgAABnLJ
+CABwKBIAAAosGANy9wgAcG8OAAAGA3IpCQBwbwwAAAYrUgNvBgAABnJbCQBwKBIAAAosGANyhwkA
+cG8OAAAGA3LNCQBwbwwAAAYrKANvBgAABnL5CQBwKBIAAAosFgNyPwoAcG8OAAAGA3KlCgBwbwwA
+AAYDbwgAAAZy2woAcCgSAAAKLBsDcvsKAHBvEAAABgNyJwsAcG8SAAAGOKYAAAADbwgAAAZyTwsA
+cCgSAAAKLBgDcnkLAHBvEAAABgNylQsAcG8SAAAGK3wDbwgAAAZy3QsAcCgSAAAKLBgDcgEMAHBv
+EAAABgNyLwwAcG8SAAAGK1IDbwgAAAZyVQwAcCgSAAAKLBgDcncMAHBvEAAABgNyoQwAcG8SAAAG
+KygDbwgAAAZytwwAcCgSAAAKLBYDcs8MAHBvEAAABgNy7QwAcG8SAAAGA28KAAAGcg0NAHAoEgAA
+CiwXA3IfDQBwbxQAAAYDcjkNAHBvFgAABioDbwoAAAZyTQ0AcCgSAAAKLBYDcl8NAHBvFAAABgNy
+bw0AcG8WAAAGKh4CKBoAAAYqKgIDBAUoEwAACipSAnsUAAAKAnsVAAAKFpRvFgAACioiAhYoFwAA
+CipSAnsUAAAKAnsVAAAKF5RvFgAACioiAhcoFwAACipSAnsUAAAKAnsVAAAKGJRvFgAACioiAhgo
+FwAACiomAhkDKBgAAAoqWgMsCAIZKBkAAAoqcn0NAHBzGgAACnomAhoDKBgAAAoqWgMsCAIaKBkA
+AAoqcn0NAHBzGgAACnomAhsDKBgAAAoqWgMsCAIbKBkAAAoqcn0NAHBzGgAACnomAhwDKBgAAAoq
+WgMsCAIcKBkAAAoqcn0NAHBzGgAACnomAh0DKBgAAAoqWgMsCAIdKBkAAAoqcn0NAHBzGgAACnom
+Ah4DKBgAAAoqWgMsCAIeKBkAAAoqcn0NAHBzGgAACnoeAigbAAAKKh4CKBwAAAoqfgIoHQAACgIC
+cx4AAAZ9AQAABAICcx8AAAZ9AgAABCqSBHIaDgBwGm8eAAAKLBUCBQIDKB8AAAoOBHMFAAAGbxwA
+AAYqSisHAgNvHQAABgNvGAAABi3xKgYqOgIoIAAACgIDfQMAAAQqOgIoIAAACgIDfQQAAAQqHgIo
+IAAACiqufgUAAAQtHnIqDgBw0AcAAAIoIQAACm8iAAAKcyMAAAqABQAABH4FAAAEKhp+BgAABCoe
+AoAGAAAEKhp+BwAABCoeAigkAAAKKi5zJQAABoAHAAAEKkJTSkIBAAEAAAAAAAwAAAB2NC4wLjMw
+MzE5AAAAAAUAbAAAABQHAAAjfgAAgAcAAMgHAAAjU3RyaW5ncwAAAABIDwAAnA4AACNVUwDkHQAA
+EAAAACNHVUlEAAAA9B0AAKgBAAAjQmxvYgAAAAAAAAACAAABVxWgAQkBAAAA+gEzABYAAAEAAAAf
+AAAACAAAAAcAAAAmAAAAGQAAACQAAAAQAAAAAwAAABUAAAAWAAAAAQAAAAQAAAABAAAAAABqAwEA
+AAAAAAYAYQKuBQYA9QKuBQYArQGbBQ8AIgYAAAYA2gHwBAYARALwBAYAJQLwBAYA3ALwBAYAgQLw
+BAYAmgLwBAYA8QHwBAYADAIwAwoAtQLHAAoAbQXHAA4AXgXHAAoAOQXHAAoA6AbHAAYAqwaoBAYA
+kAGbBQYAfgXOBQYALQXbBBIAYAFUAxIAwQFUAxIASAHGBAYAdQGuBQYATQOoBAYAAgWoBAYAHAWo
+BAYAGwGoBAYATwCoBAYAbQfwBAAAAAABAAAAAAABAAEAAQAQALsEAAAQAAEAAQABABAAUQUAADkA
+AQAFAAEAEADKBgAARQABABoAAQAQAJ8GAABJAAMAHgABABAAYAYAAEkABAAfAAAAEADVBTEGSQAF
+ACAAAAEQAI8GMQZhAAcAJAAGAJ8GeQAGAGAGfQABANgGgQABANgGgQARAK8EhQARADgBiQARAD8A
+jQBQIAAAAADGABMDBgABAFggAAAAAMYAHgMGAAEAYCAAAAAAxgBKB5EAAQB/JAAAAACGGI4FBgAC
+AIckAAAAAIYYjgUhAAIAkiQAAAAAhgiLAJcABQCnJAAAAACGCLEDQwAFALAkAAAAAIYIBwGXAAUA
+xSQAAAAAhggeBEMABQDOJAAAAACGCJ0HlwAFAOMkAAAAAIYIcwRDAAUA7CQAAAAAhghzABAABQD2
+JAAAAACGCJIDmwAGAA0lAAAAAIYIpAAQAAcAFyUAAAAAhgjRA5sACAAuJQAAAACGCPcAEAAJADgl
+AAAAAIYIBwSbAAoATyUAAAAAhgjoABAACwBZJQAAAACGCPEDmwAMAHAlAAAAAIYIiQcQAA0AeiUA
+AAAAhghYBJsADgCRJQAAAACGCHYHEAAPAJslAAAAAIYIPgSbABAAsiUAAAAAhgBhB0MAEQC6JQAA
+AACGALIGQwARAMIlAAAAAIYYjgUGABEA4iUAAAAAxgA9B6AAEQAHJgAAAADGATYHkQAVABomAAAA
+AMYBSgeRABYAHCYAAAAAhhiOBaoAFwArJgAAAACGGI4FqgAYADomAAAAAIMYjgUGABkAQiYAAAAA
+kwh6BbAAGQBuJgAAAACTCCABtQAZAHUmAAAAAJMILAG6ABkAfSYAAAAAlgi+BsAAGgCEJgAAAACG
+GI4FBgAaAIwmAAAAAJEYlAXFABoAAAABAGUHAAABAHMFAAACAGoGAAADAEcFAAABACoDAAABACoD
+AAABACoDAAABACoDAAABACoDAAABACoDAAABACoDAAABACoDAAABACoDAAABACoDAAABACoDAAAB
+ACoDAAABAAoAAAACAL0AAAADAHMFAAAEAEcFAAABAHMFAAABAGUHAAABAO4GAAABAO4GAAABACoD
+CQCOBQEAEQCOBQYAGQCOBQoAKQCOBRAAMQCOBRAAOQCOBRAAQQCOBRAASQCOBRAAUQCOBRAAWQCO
+BRAAYQCOBRAAaQCOBQYAmQCOBQYAuQCOBRUAyQCOBQYAiQATAwYAiQAeAwYA0QC6BxsAcQCOBSEA
+cQBzBSsAcQBqBi8AeQBKAzMAcQCQBDgAcQCfBD0AcQCXBAEA2QCOBRAAcQBhB0MAcQCyBkMAiQCO
+BQYA0QCYBkcAiQB+Bk4AkQCOBQYA6QBhAFQA6QBpB1sAoQCOBWAAwQCOBQYALgALAOAALgATAOkA
+LgAbAAgBLgAjABEBLgArADoBLgAzADoBLgA7ADoBLgBDABEBLgBLAEABLgBTADoBLgBbAFcBQwBj
+AKEB4QB7AKEB4wBrAKEBaQJzAAgBiQJzAAgBAwABAAcAEwAIABUAAACPAMkAAAC1A80AAAALAckA
+AAAiBM0AAAChB8kAAAB3BM0AAAB3AMkAAACWA80AAACoAMkAAADVA80AAAD7AMkAAAALBM0AAADs
+AMkAAAD1A80AAACNB8kAAABcBM0AAAB6B8kAAABCBM0AAAB+BdEAAABAAdYAAADCBtsAAgAGAAMA
+AgAHAAUAAgAIAAcAAgAJAAkAAgAKAAsAAgALAA0AAQAMAA8AAQANABEAAQAOABMAAQAPABUAAQAQ
+ABcAAQARABkAAQASABsAAQATAB0AAQAUAB8AAQAVACEAAQAWACMAAQAXACUAAgAhACcAAgAiACkA
+AQAjACkAAgAkACsABIAAAAEAAAAAAAAAAAAAAAAAEgAAAAQAAAAAAAAAAAAAAGcANgAAAAAAEAAA
+AAAAAAAAAAAAcAD4BgAAAAAQAAAAAAAAAAAAAABwABUHAAAAAAQAAAAAAAAAAAAAAGcAqAQAAAAA
+AAAAAAEAAADfBQAAAAAAAAA8TW9kdWxlPgBJbnB1dElEAFNDXzEyYTUyN2MxYjMwMDQ0OWQ5OWQ3
+MGI2ODRjOTljN2NhAG1zY29ybGliAGRlZmF1bHRJbnN0YW5jZQBSdW50aW1lVHlwZUhhbmRsZQBH
+ZXRUeXBlRnJvbUhhbmRsZQBzZXRfRnJlbmNoUHJvbW90aW9uTmFtZQBnZXRfRW5nbGlzaFByb21v
+dGlvbk5hbWUAc2V0X1NwYW5pc2hQcm9tb3Rpb25OYW1lAElucHV0TmFtZQBNaWNyb3NvZnQuU3Fs
+U2VydmVyLkR0cy5QaXBlbGluZQBzZXRfRnJlbmNoVHlwZQBzZXRfU3BhbmlzaFR5cGUAZ2V0X0Vu
+Z2xpc2hQcm9tb3Rpb25UeXBlAGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAHJlc291cmNlQ3VsdHVy
+ZQBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBDb21waWxlckdl
+bmVyYXRlZEF0dHJpYnV0ZQBEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAERlYnVnZ2FibGVB
+dHRyaWJ1dGUARWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUA
+QXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1dGUAVGFyZ2V0RnJhbWV3b3JrQXR0cmlidXRlAEFzc2Vt
+Ymx5Q29uZmlndXJhdGlvbkF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAENv
+bXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFz
+c2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAFNTSVNTY3JpcHRDb21wb25lbnRFbnRyeVBvaW50QXR0
+cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJp
+YnV0ZQBQcmVFeGVjdXRlAFBvc3RFeGVjdXRlAHZhbHVlAFN5c3RlbS5SdW50aW1lLlZlcnNpb25p
+bmcAR2V0U3RyaW5nAFN5c3RlbS5Db21wb25lbnRNb2RlbABTQ18xMmE1MjdjMWIzMDA0NDlkOTlk
+NzBiNjg0Yzk5YzdjYS5kbGwAc2V0X0ZyZW5jaFByb21vdGlvbk5hbWVfSXNOdWxsAGdldF9Fbmds
+aXNoUHJvbW90aW9uTmFtZV9Jc051bGwAc2V0X1NwYW5pc2hQcm9tb3Rpb25OYW1lX0lzTnVsbABz
+ZXRfRnJlbmNoVHlwZV9Jc051bGwAc2V0X1NwYW5pc2hUeXBlX0lzTnVsbABnZXRfRW5nbGlzaFBy
+b21vdGlvblR5cGVfSXNOdWxsAHNldF9GcmVuY2hDYXRlZ29yeV9Jc051bGwAc2V0X1NwYW5pc2hD
+YXRlZ29yeV9Jc051bGwAZ2V0X0VuZ2xpc2hQcm9tb3Rpb25DYXRlZ29yeV9Jc051bGwAU2V0TnVs
+bABzZXRfSXRlbQBTeXN0ZW0AcmVzb3VyY2VNYW4AU2NyaXB0TWFpbgBTeXN0ZW0uQ29uZmlndXJh
+dGlvbgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBJbnZhbGlkT3BlcmF0
+aW9uRXhjZXB0aW9uAFN0cmluZ0NvbXBhcmlzb24AQ3VsdHVyZUluZm8AT3V0cHV0TmFtZU1hcABP
+dXRwdXRNYXAASW5wdXQwQnVmZmVyAFBpcGVsaW5lQnVmZmVyAFNjcmlwdEJ1ZmZlcgBnZXRfUmVz
+b3VyY2VNYW5hZ2VyAC5jdG9yAC5jY3RvcgBTeXN0ZW0uRGlhZ25vc3RpY3MAU3lzdGVtLlJ1bnRp
+bWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAFNDXzEyYTUyN2MxYjMwMDQ0OWQ5
+OWQ3MGI2ODRjOTljN2NhLlByb3BlcnRpZXMuUmVzb3VyY2VzLnJlc291cmNlcwBEZWJ1Z2dpbmdN
+b2RlcwBTQ18xMmE1MjdjMWIzMDA0NDlkOTlkNzBiNjg0Yzk5YzdjYS5Qcm9wZXJ0aWVzAFZhcmlh
+YmxlcwBCdWZmZXJDb2x1bW5JbmRleGVzAEdldENvbHVtbkluZGV4ZXMAU2V0dGluZ3MARXF1YWxz
+AENvbm5lY3Rpb25zAE9iamVjdABFbmRPZlJvd3NldABnZXRfRGVmYXVsdABVc2VyQ29tcG9uZW50
+AFBhcmVudENvbXBvbmVudABTY3JpcHRDb21wb25lbnQATWljcm9zb2Z0LlNxbFNlcnZlci5UeFNj
+cmlwdABNaWNyb3NvZnQuU3FsU2VydmVyLlBpcGVsaW5lSG9zdABJbnB1dDBfUHJvY2Vzc0lucHV0
+AElucHV0MF9Qcm9jZXNzSW5wdXRSb3cATmV4dFJvdwBnZXRfQXNzZW1ibHkAc2V0X0ZyZW5jaENh
+dGVnb3J5AHNldF9TcGFuaXNoQ2F0ZWdvcnkAZ2V0X0VuZ2xpc2hQcm9tb3Rpb25DYXRlZ29yeQBv
+cF9FcXVhbGl0eQAAAAAXTgBvACAARABpAHMAYwBvAHUAbgB0AAAbUwBpAG4AIABkAGUAcwBjAHUA
+ZQBuAHQAbwAAG0EAdQBjAHUAbgBlACAAcgBlAG0AaQBzAGUAADFWAG8AbAB1AG0AZQAgAEQAaQBz
+AGMAbwB1AG4AdAAgADEAMQAgAHQAbwAgADEANAAAS0QAZQBzAGMAdQBlAG4AdABvACAAcABvAHIA
+IAB2AG8AbAB1AG0AZQBuACAAKABlAG4AdAByAGUAIAAxADEAIAB5ACAAMQA0ACkAAEFSAGUAbQBp
+AHMAZQAgAHMAdQByACAAcQB1AGEAbgB0AGkAdADpACAAKABkAGUAIAAxADEAIADgACAAMQA0ACkA
+ATFWAG8AbAB1AG0AZQAgAEQAaQBzAGMAbwB1AG4AdAAgADEANQAgAHQAbwAgADIANAAAS0QAZQBz
+AGMAdQBlAG4AdABvACAAcABvAHIAIAB2AG8AbAB1AG0AZQBuACAAKABlAG4AdAByAGUAIAAxADUA
+IAB5ACAAMgA0ACkAAEFSAGUAbQBpAHMAZQAgAHMAdQByACAAcQB1AGEAbgB0AGkAdADpACAAKABk
+AGUAIAAxADUAIADgACAAMgA0ACkAATFWAG8AbAB1AG0AZQAgAEQAaQBzAGMAbwB1AG4AdAAgADIA
+NQAgAHQAbwAgADQAMAAAS0QAZQBzAGMAdQBlAG4AdABvACAAcABvAHIAIAB2AG8AbAB1AG0AZQBu
+ACAAKABlAG4AdAByAGUAIAAyADUAIAB5ACAANAAwACkAAEFSAGUAbQBpAHMAZQAgAHMAdQByACAA
+cQB1AGEAbgB0AGkAdADpACAAKABkAGUAIAAyADUAIADgACAANAAwACkAATFWAG8AbAB1AG0AZQAg
+AEQAaQBzAGMAbwB1AG4AdAAgADQAMQAgAHQAbwAgADYAMAAAS0QAZQBzAGMAdQBlAG4AdABvACAA
+cABvAHIAIAB2AG8AbAB1AG0AZQBuACAAKABlAG4AdAByAGUAIAA0ADEAIAB5ACAANgAwACkAAEFS
+AGUAbQBpAHMAZQAgAHMAdQByACAAcQB1AGEAbgB0AGkAdADpACAAKABkAGUAIAA0ADEAIADgACAA
+NgAwACkAAS9WAG8AbAB1AG0AZQAgAEQAaQBzAGMAbwB1AG4AdAAgAG8AdgBlAHIAIAA2ADAAAENE
+AGUAcwBjAHUAZQBuAHQAbwAgAHAAbwByACAAdgBvAGwAdQBtAGUAbgAgACgAbQDhAHMAIABkAGUA
+IAA2ADAAKQABR1IAZQBtAGkAcwBlACAAcwB1AHIAIABxAHUAYQBuAHQAaQB0AOkAIAAoAGEAdQAt
+AGQAZQBsAOAAIABkAGUAIAA2ADAAKQABN00AbwB1AG4AdABhAGkAbgAtADEAMAAwACAAQwBsAGUA
+YQByAGEAbgBjAGUAIABTAGEAbABlAAFRTABpAHEAdQBpAGQAYQBjAGkA8wBuACAAZABlACAAYgBp
+AGMAaQBjAGwAZQB0AGEAIABkAGUAIABtAG8AbgB0AGEA8QBhACwAIAAxADAAMAABJ0wAaQBxAHUA
+aQBkAGEAdABpAG8AbgAgAFYAVABUACAAMQAwADAAADVTAHAAbwByAHQAIABIAGUAbABtAGUAdAAg
+AEQAaQBzAGMAbwB1AG4AdAAtADIAMAAwADIAAUFDAGEAcwBjAG8AIABkAGUAcABvAHIAdABpAHYA
+bwAsACAAZABlAHMAYwB1AGUAbgB0AG8AOgAgADIAMAAwADIAAEdSAGUAbQBpAHMAZQAgAHMAdQBy
+ACAAbABlAHMAIABjAGEAcwBxAHUAZQBzACAAcwBwAG8AcgB0ACAALQAgADIAMAAwADIAASVSAG8A
+YQBkAC0ANgA1ADAAIABPAHYAZQByAHMAdABvAGMAawABWUIAaQBjAGkAYwBsAGUAdABhACAAZABl
+ACAAYwBhAHIAcgBlAHQAZQByAGEAOgAgADYANQAwACwAIABvAGYAZQByAHQAYQAgAGUAcwBwAGUA
+YwBpAGEAbAAAOUQA6QBzAHQAbwBjAGsAYQBnAGUAIABWAOkAbABvACAAZABlACAAcgBvAHUAdABl
+ACAANgA1ADAAASVNAG8AdQBuAHQAYQBpAG4AIABUAGkAcgBlACAAUwBhAGwAZQAAO08AZgBlAHIA
+dABhACAAZABlACAAYwB1AGIAaQBlAHIAdABhACAAZABlACAAbQBvAG4AdABhAPEAYQABK1YAZQBu
+AHQAZQAgAGQAZQAgAHAAbgBlAHUAcwAgAGQAZQAgAFYAVABUAAA1UwBwAG8AcgB0ACAASABlAGwA
+bQBlAHQAIABEAGkAcwBjAG8AdQBuAHQALQAyADAAMAAzAAFBQwBhAHMAYwBvACAAZABlAHAAbwBy
+AHQAaQB2AG8ALAAgAGQAZQBzAGMAdQBlAG4AdABvADoAIAAyADAAMAAzAABHUgBlAG0AaQBzAGUA
+IABzAHUAcgAgAGwAZQBzACAAYwBhAHMAcQB1AGUAcwAgAHMAcABvAHIAdAAgAC0AIAAyADAAMAAz
+AAElTABMACAAUgBvAGEAZAAgAEYAcgBhAG0AZQAgAFMAYQBsAGUAAEFPAGYAZQByAHQAYQAgAGQA
+ZQAgAGMAdQBhAGQAcgBvACAAZABlACAAYwBhAHIAcgBlAHQAZQByAGEAIABHAEIAAEdWAGUAbgB0
+AGUAIABkAGUAIABjAGEAZAByAGUAcwAgAGQAZQAgAHYA6QBsAG8AIABkAGUAIAByAG8AdQB0AGUA
+IABMAEwAAS1UAG8AdQByAGkAbgBnAC0AMQAwADAAMAAgAFAAcgBvAG0AbwB0AGkAbwBuAAExUABy
+AG8AbQBvAGMAaQDzAG4AIAAYIFQAbwB1AHIAaQBuAGcALQAxADAAMAAwABkgATFQAHIAbwBtAG8A
+dABpAG8AbgAgABwgVABvAHUAcgBpAG4AZwAtADEAMAAwADAAHSABLVQAbwB1AHIAaQBuAGcALQAz
+ADAAMAAwACAAUAByAG8AbQBvAHQAaQBvAG4AATFQAHIAbwBtAG8AYwBpAPMAbgAgABggVABvAHUA
+cgBpAG4AZwAtADMAMAAwADAAGSABMVAAcgBvAG0AbwB0AGkAbwBuACAAHCBUAG8AdQByAGkAbgBn
+AC0AMwAwADAAMAAdIAErSABhAGwAZgAtAFAAcgBpAGMAZQAgAFAAZQBkAGEAbAAgAFMAYQBsAGUA
+AUVWAGUAbgB0AGEAIABkAGUAIABwAGUAZABhAGwAZQBzACAAYQAgAG0AaQB0AGEAZAAgAGQAZQAg
+AHAAcgBlAGMAaQBvAAArUADpAGQAYQBsAGUAcwAgAOAAIABtAG8AaQB0AGkA6QAgAHAAcgBpAHgA
+AUVNAG8AdQBuAHQAYQBpAG4ALQA1ADAAMAAgAFMAaQBsAHYAZQByACAAQwBsAGUAYQByAGEAbgBj
+AGUAIABTAGEAbABlAAFlTABpAHEAdQBpAGQAYQBjAGkA8wBuACAAZABlACAAYgBpAGMAaQBjAGwA
+ZQB0AGEAIABkAGUAIABtAG8AbgB0AGEA8QBhACwAIAA1ADAAMAAsACAAcABsAGEAdABlAGEAZABh
+AAE1TABpAHEAdQBpAGQAYQB0AGkAbwBuACAAVgBUAFQAIAA1ADAAMAAgAGEAcgBnAGUAbgB0AAAf
+VgBvAGwAdQBtAGUAIABEAGkAcwBjAG8AdQBuAHQAACtEAGUAcwBjAHUAZQBuAHQAbwAgAHAAbwBy
+ACAAdgBvAGwAdQBtAGUAbgAAJ1IAZQBtAGkAcwBlACAAcwB1AHIAIABxAHUAYQBuAHQAaQB0AOkA
+ASlEAGkAcwBjAG8AbgB0AGkAbgB1AGUAZAAgAFAAcgBvAGQAdQBjAHQAABtEAGUAcwBjAGEAdABh
+AGwAbwBnAGEAZABvAABHQwBlACAAcAByAG8AZAB1AGkAdAAgAG4AJwBlAHMAdAAgAHAAbAB1AHMA
+IABjAG8AbQBtAGUAcgBjAGkAYQBsAGkAcwDpAAEjUwBlAGEAcwBvAG4AYQBsACAARABpAHMAYwBv
+AHUAbgB0AAAtRABlAHMAYwB1AGUAbgB0AG8AIABkAGUAIAB0AGUAbQBwAG8AcgBhAGQAYQAAJVIA
+ZQBtAGkAcwBlACAAcwBhAGkAcwBvAG4AbgBpAOgAcgBlAAEhRQB4AGMAZQBzAHMAIABJAG4AdgBl
+AG4AdABvAHIAeQAAKUkAbgB2AGUAbgB0AGEAcgBpAG8AIABlAHgAYwBlAGQAZQBuAHQAZQAAFUQA
+6QBzAHQAbwBjAGsAYQBnAGUAARdOAGUAdwAgAFAAcgBvAGQAdQBjAHQAAB1QAHIAbwBkAHUAYwB0
+AG8AIABOAHUAZQB2AG8AAB9OAG8AdQB2AGUAYQB1ACAAcAByAG8AZAB1AGkAdAAAEVIAZQBzAGUA
+bABsAGUAcgAAGUQAaQBzAHQAcgBpAGIAdQBpAGQAbwByAAATUgBlAHYAZQBuAGQAZQB1AHIAABFD
+AHUAcwB0AG8AbQBlAHIAAA9DAGwAaQBlAG4AdABlAAANQwBsAGkAZQBuAHQAAICbSQBzAE4AdQBs
+AGwAIABwAHIAbwBwAGUAcgB0AHkAIABjAGEAbgBuAG8AdAAgAGIAZQAgAHMAZQB0ACAAdABvACAA
+RgBhAGwAcwBlAC4AIABBAHMAcwBpAGcAbgAgAGEAIAB2AGEAbAB1AGUAIAB0AG8AIAB0AGgAZQAg
+AGMAbwBsAHUAbQBuACAAaQBuAHMAdABlAGEAZAAuAAAPSQBuAHAAdQB0ACAAMAAAcVMAQwBfADEA
+MgBhADUAMgA3AGMAMQBiADMAMAAwADQANAA5AGQAOQA5AGQANwAwAGIANgA4ADQAYwA5ADkAYwA3
+AGMAYQAuAFAAcgBvAHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAAhNnv8ELkkCq
+kelIWamZSgAEIAEBCAMgAAEFIAEBEREEIAEBDgUgAQERWQUAAgIODgkgAwESPR0IEkEDBhI9AwYd
+CAQgAQ4IBCABAggFIAIBCBwDIAACBiACAg4RcQUgAR0ICAYAARJ1EXkEIAASfQYgAgEOEn0It3pc
+Vhk04IkIiYRdzYCAzJEDBhIUAwYSGAMGEkUDBhJRAwYSVQMGEiAFIAEBEgwDIAAOBCABAQIJIAQB
+CA4SPRJBBSABARJFBAAAElEEAAASVQUAAQESVQQAABIgAwAAAQMoAA4DKAACBAgAElEECAASVQQI
+ABIgCAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAQgBAAIAAAAAACgBACNT
+Q18xMmE1MjdjMWIzMDA0NDlkOTlkNzBiNjg0Yzk5YzdjYQAABQEAAAAAFgEAEUNvcHlyaWdodCBA
+ICAyMDI0AABJAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjcBAFQOFEZyYW1ld29ya0Rpc3Bs
+YXlOYW1lEi5ORVQgRnJhbWV3b3JrIDQuNwQBAAAAAAC0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5S
+ZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1
+cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3Vy
+Y2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAAFEcAAAAAAAAAAAAA
+LkcAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBHAAAAAAAAAAAAAAAAX0NvckRsbE1haW4AbXNj
+b3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABABAAAAAY
+AACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAAAABIAAAAWGAAAOwD
+AAAAAAAAAAAAAOwDNAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBPAAAAAAC9BO/+AAAB
+AAAAAQAAAAAAAAABAAAAAAA/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAARAAAAAEAVgBhAHIA
+RgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBvAG4AAAAAAAAAsARM
+AwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAAAoAwAAAQAwADAAMAAwADAANABiADAA
+AAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABhAG4AeQBOAGEAbQBl
+AAAAAAAAAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMAQwBfADEA
+MgBhADUAMgA3AGMAMQBiADMAMAAwADQANAA5AGQAOQA5AGQANwAwAGIANgA4ADQAYwA5ADkAYwA3
+AGMAYQAAADAACAABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAALgAwAC4AMAAAAHAA
+KAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBDAF8AMQAyAGEANQAyADcAYwAxAGIAMwAw
+ADAANAA0ADkAZAA5ADkAZAA3ADAAYgA2ADgANABjADkAOQBjADcAYwBhAC4AZABsAGwAAABIABIA
+AQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAg
+ADIAMAAyADQAAAAqAAEAAQBMAGUAZwBhAGwAVAByAGEAZABlAG0AYQByAGsAcwAAAAAAAAAAAHgA
+KAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABTAEMAXwAxADIAYQA1ADIANwBj
+ADEAYgAzADAAMAA0ADQAOQBkADkAOQBkADcAMABiADYAOAA0AGMAOQA5AGMANwBjAGEALgBkAGwA
+bAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBDAF8AMQAyAGEANQAyADcAYwAx
+AGIAMwAwADAANAA0ADkAZAA5ADkAZAA3ADAAYgA2ADgANABjADkAOQBjADcAYwBhAAAANAAIAAEA
+UAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAADgACAABAEEAcwBz
+AGUAbQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAwAAABANwAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_12a527c1b300449d99d70b684c99c7ca</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum140"
+                  typeConverter="NOTBROWSABLE">78</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Script Component.Inputs[Input 0]"
+                  hasSideEffects="true"
+                  name="Input 0">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Script Component.Inputs[Input 0].Columns[EnglishPromotionName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EnglishPromotionName"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Script Component.Inputs[Input 0].Columns[EnglishPromotionType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EnglishPromotionType"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Script Component.Inputs[Input 0].Columns[EnglishPromotionCategory]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EnglishPromotionCategory"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionCategory]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Script Component.Outputs[Output 0]"
+                  name="Output 0"
+                  synchronousInputId="Package\Data Flow Task\Script Component.Inputs[Input 0]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchPromotionName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchPromotionName]"
+                      name="FrenchPromotionName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishPromotionName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishPromotionName]"
+                      name="SpanishPromotionName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishType]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishType]"
+                      name="SpanishType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchType]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchType]"
+                      name="FrenchType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishCategory]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[SpanishCategory]"
+                      name="SpanishCategory" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchCategory]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[FrenchCategory]"
+                      name="FrenchCategory" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\SpecialOffer"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SpecialOffer"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Sales].[SpecialOffer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\SpecialOffer.Connections[OleDbConnection]"
+                  connectionManagerID="{B4889333-05A1-4539-B388-0564CC5F33B3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.AdventureWorks2022]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[SpecialOfferID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[SpecialOfferID]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[SpecialOfferID]"
+                      name="SpecialOfferID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionName]"
+                      name="EnglishPromotionName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[DiscountPct]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[DiscountPct]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[DiscountPct]"
+                      name="DiscountPct"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionType]"
+                      name="EnglishPromotionType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionCategory]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EnglishPromotionCategory]"
+                      name="EnglishPromotionCategory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[StartDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[StartDate]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[StartDate]"
+                      name="StartDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EndDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[EndDate]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[EndDate]"
+                      name="EndDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[MinQty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[MinQty]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[MinQty]"
+                      name="MinQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[MaxQty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[MaxQty]"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].Columns[MaxQty]"
+                      name="MaxQty"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[SpecialOfferID]"
+                      dataType="i4"
+                      name="SpecialOfferID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[DiscountPct]"
+                      dataType="cy"
+                      name="DiscountPct" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                      dataType="wstr"
+                      length="50"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="50"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[StartDate]"
+                      dataType="dbTimeStamp"
+                      name="StartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[EndDate]"
+                      dataType="dbTimeStamp"
+                      name="EndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[MinQty]"
+                      dataType="i4"
+                      name="MinQty" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[MaxQty]"
+                      dataType="i4"
+                      name="MaxQty" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[SpecialOfferID]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[SpecialOfferID]"
+                      name="SpecialOfferID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[DiscountPct]"
+                      dataType="cy"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[DiscountPct]"
+                      name="DiscountPct" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[Type]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[Type]"
+                      name="Type" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      name="Category" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[StartDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[StartDate]"
+                      name="StartDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[EndDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[EndDate]"
+                      name="EndDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[MinQty]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[MinQty]"
+                      name="MinQty" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[MaxQty]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[MaxQty]"
+                      name="MaxQty" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Script Component.Inputs[Input 0]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\SpecialOffer.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Output 0]"
+              endId="Package\Data Flow Task\DimPromotion.Inputs[OLE DB Destination Input]"
+              name="Output 0"
+              startId="Package\Data Flow Task\Script Component.Outputs[Output 0]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="367,126" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Data Flow Task\Script Component"
+          TopLeft="188,73" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Data Flow Task\DimPromotion"
+          TopLeft="412,135" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Data Flow Task\SpecialOffer"
+          TopLeft="31,14" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Output 0]"
+          TopLeft="351,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="61,62"
+              Start="0,0"
+              End="53.5,62">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="26.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26.5,0"
+                    Point2="30.5,0"
+                    Point3="30.5,4" />
+                  <mssgle:LineSegment
+                    End="30.5,58" />
+                  <mssgle:CubicBezierSegment
+                    Point1="30.5,58"
+                    Point2="30.5,62"
+                    Point3="34.5,62" />
+                  <mssgle:LineSegment
+                    End="53.5,62" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="167,35">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="102.5,38"
+              Start="0,0"
+              End="102.5,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="98.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="98.5,0"
+                    Point2="102.5,0"
+                    Point3="102.5,4" />
+                  <mssgle:LineSegment
+                    End="102.5,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\SpecialOffer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\DimPromotion">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
