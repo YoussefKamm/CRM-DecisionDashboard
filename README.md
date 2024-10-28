@@ -27,12 +27,12 @@ The project involves:
 ## 📂 Folder Structure
 CRM-DecisionDashboard/
 
-├── Dashboard-Cap/ # Screenshots of dashboards (.png)
-├── Pfe_Project_SSIS/ # SSIS project files and packages
-├── Pfe_Project_SSAS/ # SSAS models and configuration files
-├── Image/ # Images used in the dashboard (.png)
-├── AdventureWorks2022.pbix # Power BI project file (pbix)
-├── README.md # Project documentation
+- ├── Dashboard-Cap/ # Screenshots of dashboards (.png)
+- ├── Pfe_Project_SSIS/ # SSIS project files and packages
+- ├── Pfe_Project_SSAS/ # SSAS models and configuration files
+- ├── Image/ # Images used in the dashboard (.png)
+- ├── AdventureWorks2022.pbix # Power BI project file (pbix)
+- ├── README.md # Project documentation
 
 ---
 
