@@ -50,31 +50,31 @@ CRM-DecisionDashboard/
 
 ## 🏆 Dashboard Preview
 
-### Home Dashboard:
+- ### Home Dashboard:
 
 ![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Home.jpg)
 
-### Product Dashboard:
+- ### Product Dashboard:
 
 ![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Product.jpg)
 
-### ProductDetails Dashboard:
+- ### ProductDetails Dashboard:
 
 ![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/ProductDetails.jpg)
 
-### Employee Dashboard:
+- ### Employee Dashboard:
 
 ![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Employee.jpg)
 
-### Sales Dashboard:
+- ### Sales Dashboard:
 
 ![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Sales.jpg)
 
-### InternetSales Dashboard:
+- ### InternetSales Dashboard:
 
 ![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Internet.jpg)
 
-### ResellerSales Dashboard:
+- ### ResellerSales Dashboard:
 
 ![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Reseller.jpg)
 
