@@ -5,12 +5,13 @@ This project focuses on analyzing CRM data and creating an interactive Power BI 
 ---
 
 ## 🚀 Project Overview
+
 The project involves:
 
-Data integration and ETL workflows using SSIS.
-Data modeling and analytical processing with SSAS.
-Interactive visualizations using Power BI.
-Comprehensive insights into KPIs to track CRM performance and customer behaviors.
+- Data integration and ETL workflows using SSIS.
+- Data modeling and analytical processing with SSAS.
+- Interactive visualizations using Power BI.
+- Comprehensive insights into KPIs to track CRM performance and customer behaviors.
 
 ---
 
