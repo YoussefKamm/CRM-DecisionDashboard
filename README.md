@@ -49,13 +49,35 @@ CRM-DecisionDashboard/
 ---
 
 ## 🏆 Dashboard Preview
-Sales Dashboard:
 
+### Home Dashboard:
 
-Customer Dashboard:
+![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-cap/Home.jpg)
 
+### Product Dashboard:
 
-Overview Dashboard:
+![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+
+### ProductDetails Dashboard:
+
+![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+
+### Employee Dashboard:
+
+![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+
+### Sales Dashboard:
+
+![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+
+### InternetSales Dashboard:
+
+![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+
+### ResellerSales Dashboard:
+
+![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+
 
 ---
 
