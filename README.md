@@ -1,6 +1,9 @@
 # 📊 CRM Decision Dashboard
 
-This project focuses on analyzing CRM data and creating an interactive Power BI dashboard to visualize insights related to customer relationships, sales, and business performance. The dashboards support data-driven decision-making within a CRM system by presenting actionable insights. **(Implementation of a decision-making solution for decision support in a CRM)**
+
+This repository contains the PFE (End of Study) project focused on building a decision-making solution for a CRM using Microsoft tools such as SSMS, SSIS, SSAS, and Power BI.
+
+The project involves analyzing CRM data and creating an interactive Power BI dashboard to visualize insights related to customer relationships, sales, product performance, and business performance. These dashboards support data-driven decision-making within the CRM system by presenting actionable insights, facilitating strategic decision support.
 
 ---
 
