@@ -52,31 +52,31 @@ CRM-DecisionDashboard/
 
 ### Home Dashboard:
 
-![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-cap/Home.jpg)
+![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Home.jpg)
 
 ### Product Dashboard:
 
-![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Product.jpg)
 
 ### ProductDetails Dashboard:
 
-![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/ProductDetails.jpg)
 
 ### Employee Dashboard:
 
-![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Employee.jpg)
 
 ### Sales Dashboard:
 
-![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Sales.jpg)
 
 ### InternetSales Dashboard:
 
-![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Internet.jpg)
 
 ### ResellerSales Dashboard:
 
-![image](https://github.com/YoussefKamm/S-P-500-Stock-Market-Analysis/blob/main/Dashboard-cap/Home.jpg)
+![image](https://github.com/YoussefKamm/CRM-DecisionDashboard/blob/main/Dashboard-Cap/Reseller.jpg)
 
 
 ---
