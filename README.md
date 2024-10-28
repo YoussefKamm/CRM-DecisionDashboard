@@ -16,7 +16,7 @@ The project involves:
 ---
 
 ## 🛠️ Technologies Used
-- **Power BI : ** For creating interactive dashboards and visual reports
+- **Power BI :** For creating interactive dashboards and visual reports
 - **SQL Server Management Studio (SSMS) :** For querying and managing databases
 - **SQL Server Integration Services (SSIS) :** For data integration and ETL workflows
 - **SQL Server Analysis Services (SSAS) :** For multidimensional analysis
