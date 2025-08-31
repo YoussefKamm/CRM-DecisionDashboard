@@ -96,4 +96,4 @@ Feel free to open issues or submit pull requests to improve the project.
 
 ## 👤 Author
 - [LinkedIn : Youssef Kammoun](https://www.linkedin.com/in/kammounyoussef)  
-- [Email : kammounyoussef1@isimsf.u-sfax.tn](mailto:kammounyoussef1@isimsf.u-sfax.tn)
+- [Email : kammounyoussef54@gmail.com](mailto:kammounyoussef54@gmail.com)
